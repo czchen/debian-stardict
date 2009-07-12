@@ -1,0 +1,5 @@
+#
+# These directories are reserved for dictionary file.
+#
+stardict-common: package-contains-empty-directory usr/share/stardict/dic/
+stardict-common: package-contains-empty-directory usr/share/stardict/treedict/

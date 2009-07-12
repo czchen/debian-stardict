@@ -1,0 +1,218 @@
+#!/usr/bin/make -f
+# debian/rules for stardict.
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+include /usr/share/dpatch/dpatch.make
+
+# These are used for cross-compiling and for saving the configure script
+# from having to guess our platform (since we know it already)
+DEB_HOST_GNU_TYPE   ?= $(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
+DEB_BUILD_GNU_TYPE  ?= $(shell dpkg-architecture -qDEB_BUILD_GNU_TYPE)
+
+CFLAGS = -Wall -g
+
+ifneq (,$(findstring noopt,$(DEB_BUILD_OPTIONS)))
+	CFLAGS += -O0
+else
+	CFLAGS += -O2
+endif
+ifeq (,$(findstring nostrip,$(DEB_BUILD_OPTIONS)))
+	INSTALL_PROGRAM += -s
+endif
+ifneq (,$(filter parallel=%,$(DEB_BUILD_OPTIONS)))
+    NUMJOBS = $(patsubst parallel=%,%,$(filter parallel=%,$(DEB_BUILD_OPTIONS)))
+    MAKEFLAGS += -j$(NUMJOBS)
+endif
+
+
+configure: configure-stamp
+configure-stamp:
+	dh_testdir
+
+	# link the latest version of autotools
+	if test -f config.guess; then \
+		mv config.guess config.guess.debsave; \
+	fi
+	ln -sf /usr/share/misc/config.guess .
+	if test -f config.sub; then \
+		mv config.sub config.sub.debsave; \
+	fi
+	ln -sf /usr/share/misc/config.sub .
+
+	touch configure-stamp
+
+build: configure-stamp build-stamp
+
+build-stamp: patch-stamp
+	dh_testdir
+
+	./autogen.sh
+	# Add here commands to compile the package without gnome support.
+	./configure --host=$(DEB_HOST_GNU_TYPE) --build=$(DEB_BUILD_GNU_TYPE) \
+		--prefix=/usr \
+		--mandir=\$${prefix}/share/man \
+		--infodir=\$${prefix}/share/info \
+		--sysconfdir=/etc \
+		--localstatedir=/var \
+		--disable-schemas-install \
+		--disable-gnome-support \
+		--disable-gucharmap \
+		--disable-advertisement \
+		--disable-updateinfo 
+	#	 CFLAGS="$(CFLAGS)" LDFLAGS="-Wl,-z,defs"
+
+	sed -e 's/SUBDIRS = m4 src stardict-plugins/SUBDIRS = m4 src/' Makefile > Makefile-noplugins
+	$(MAKE) -f Makefile-noplugins
+	cp src/stardict stardict-gtk
+	#cp stardict-plugins/*/.libs/*.so ./
+	make distclean
+
+	# Add here commands to compile the package with gnome support
+	./configure --host=$(DEB_HOST_GNU_TYPE) --build=$(DEB_BUILD_GNU_TYPE) \
+		--prefix=/usr \
+		--mandir=\$${prefix}/share/man \
+		--infodir=\$${prefix}/share/info \
+		--sysconfdir=/etc \
+		--localstatedir=/var \
+		--disable-schemas-install \
+		--disable-advertisement \
+		--disable-updateinfo 
+	#	 CFLAGS="$(CFLAGS)" LDFLAGS="-Wl,-z,defs"
+	$(MAKE)
+
+
+	#/usr/bin/docbook-to-man debian/stardict.sgml > stardict.1
+
+	touch build-stamp
+
+clean: unpatch
+	dh_testdir
+	dh_testroot
+	rm -f build-stamp configure-stamp 
+
+	# Add here commands to clean up after the build process.
+	[ ! -f Makefile ] || $(MAKE) distclean
+
+	# Clean up
+	rm -f stardict-gtk
+	rm -f config.log
+	rm -f po/.intltool-merge-cache
+	rm -f intltool-*
+	rm -f po/Makefile.in.in
+	find -name Makefile.in | xargs rm -f
+	find -name Makefile | xargs rm -f
+	find -name .deps | xargs rm -rf
+	rm -f aclocal.m4
+	rm -f configure
+	rm -f ltmain.sh
+	rm -f missing
+	rm -f install-sh
+	rm -f m4/intltool.m4
+	rm -f m4/ltsugar.m4
+	rm -f m4/ltoptions.m4
+	rm -f m4/lt~obsolete.m4
+	rm -f m4/ltversion.m4
+	rm -f m4/libtool.m4
+	rm -f help/*/stardict-*.omf.out
+	rm -f depcomp
+	rm -f *.so
+	rm -f Makefile-noplugins
+
+	# Remove links of the latest version of autotools
+	if test -f config.guess; then \
+		rm -f config.guess; \
+		if test -e config.guess.debsave; then \
+			mv config.guess.debsave config.guess; \
+		fi; \
+	fi
+	if test -f config.sub; then \
+		rm -f config.sub; \
+		if test -e config.sub.debsave; then \
+			mv config.sub.debsave config.sub; \
+		fi; \
+	fi
+
+	dh_clean
+
+install: build
+	dh_testdir
+	dh_testroot
+	dh_clean -k
+	dh_installdirs
+
+	# Add here commands to install the package into debian/stardict.
+	$(MAKE) install DESTDIR=$(CURDIR)/debian/stardict
+
+	# Clean up unnecessary static libraries for plugins
+	rm $(CURDIR)/debian/stardict/usr/lib/stardict/plugins/*.la
+
+	# Install stardict-gtk binaries
+	install -d $(CURDIR)/debian/stardict-gtk/usr/bin
+	install -m755 stardict-gtk \
+		$(CURDIR)/debian/stardict-gtk/usr/bin/stardict
+	#install -d $(CURDIR)/debian/stardict-gtk/usr/lib/stardict/plugins
+	#install -m644 $(CURDIR)/*.so \
+	#	$(CURDIR)/debian/stardict-gtk/usr/lib/stardict/plugins
+
+	dh_movefiles --sourcedir=debian/stardict
+	rm -rf debian/stardict/usr/share 
+	rm -rf debian/stardict/usr/bin
+	rm -rf debian/stardict/usr/lib
+
+	for FOLDER in stardict-gtk stardict-gnome stardict-plugin-spell \
+		stardict-plugin stardict-plugin-espeak \
+		stardict-plugin-festival stardict-plugin-gucharmap ;\
+	    do  mkdir -p $(CURDIR)/debian/$$FOLDER/usr/share/doc ;\
+		ln -s stardict-common \
+			$(CURDIR)/debian/$$FOLDER/usr/share/doc/$$FOLDER ;\
+	done
+
+        # Install icons
+	install -d $(CURDIR)/debian/stardict-common/usr/share/pixmaps
+	install -m644 debian/stardict_16x16.xpm \
+                $(CURDIR)/debian/stardict-common/usr/share/pixmaps
+	install -m644 debian/stardict_32x32.xpm \
+                $(CURDIR)/debian/stardict-common/usr/share/pixmaps
+
+        # Install lintian-overrides
+	install -o root -g root -m 0755 -d \
+                $(CURDIR)/debian/stardict-common/usr/share/lintian/overrides
+	install -o root -g root -m 0644 \
+                debian/stardict-common.lintian-overrides \
+                $(CURDIR)/debian/stardict-common/usr/share/lintian/overrides/stardict-common
+
+# Build architecture-independent files here.
+binary-indep: build install
+# We have nothing to do by default.
+
+# Build architecture-dependent files here.
+binary-arch: build install
+	dh_testdir
+	dh_testroot
+	dh_installchangelogs -i ChangeLog
+	dh_installdocs -i 
+#	dh_installexamples
+#	dh_install
+	dh_installmenu -pstardict-common
+#	dh_installdebconf	
+	dh_installman -pstardict-gnome -pstardict-gtk
+	dh_gconf -pstardict-gnome
+	dh_icons -pstardict-common
+#	dh_link
+	dh_strip
+	dh_compress
+	dh_fixperms
+#	dh_perl
+#	dh_pysupport /usr/bin/stardict
+#	dh_makeshlibs
+	dh_installdeb
+	dh_shlibdeps -L stardict-gnome -l debian/stardict/usr/bin
+	dh_shlibdeps -L stardict-gtk -l debian/stardict-gtk/usr/bin
+	dh_gencontrol
+	dh_md5sums
+	dh_builddeb
+
+binary: binary-indep binary-arch
+.PHONY: build clean binary-indep binary-arch binary install 

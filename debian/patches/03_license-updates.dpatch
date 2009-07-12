@@ -1,0 +1,640 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## 03_license-updates.dpatch by Anthony Fok <foka@debian.org>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: Updates help files from GFDL 1.1 to 1.2 as agreed by Hu Zheng
+## DP: at the 2008 Linux Developer Symposium in Beijing.  Also fixes
+## DP: incorrect reference to the GNU Library General Public License
+## DP: in GPL'ed source files.
+
+@DPATCH@
+diff -urNad stardict-3.0.1~/help/C/legal.xml stardict-3.0.1/help/C/legal.xml
+--- stardict-3.0.1~/help/C/legal.xml	2008-02-25 00:56:55.000000000 +0800
++++ stardict-3.0.1/help/C/legal.xml	2008-02-25 01:21:34.000000000 +0800
+@@ -2,7 +2,7 @@
+          <para>
+            Permission is granted to copy, distribute and/or modify this
+            document under the terms of the GNU Free Documentation
+-           License (GFDL), Version 1.1 or any later version published
++           License (GFDL), Version 1.2 or any later version published
+            by the Free Software Foundation with no Invariant Sections,
+            no Front-Cover Texts, and no Back-Cover Texts.  You can find
+            a copy of the GFDL at this <ulink type="help"
+@@ -73,4 +73,4 @@
+            </orderedlist>
+          </para>
+    </legalnotice>
+- 
+\ No newline at end of file
++ 
+diff -urNad stardict-3.0.1~/help/mk/legal.xml stardict-3.0.1/help/mk/legal.xml
+--- stardict-3.0.1~/help/mk/legal.xml	2008-02-25 00:56:55.000000000 +0800
++++ stardict-3.0.1/help/mk/legal.xml	2008-02-25 01:21:34.000000000 +0800
+@@ -2,7 +2,7 @@
+          <para>
+            Permission is granted to copy, distribute and/or modify this
+            document under the terms of the GNU Free Documentation
+-           License (GFDL), Version 1.1 or any later version published
++           License (GFDL), Version 1.2 or any later version published
+            by the Free Software Foundation with no Invariant Sections,
+            no Front-Cover Texts, and no Back-Cover Texts.  You can find
+            a copy of the GFDL at this <ulink type="help"
+@@ -73,4 +73,4 @@
+            </orderedlist>
+          </para>
+    </legalnotice>
+- 
+\ No newline at end of file
++ 
+diff -urNad stardict-3.0.1~/help/nl/legal.xml stardict-3.0.1/help/nl/legal.xml
+--- stardict-3.0.1~/help/nl/legal.xml	2008-02-25 00:56:55.000000000 +0800
++++ stardict-3.0.1/help/nl/legal.xml	2008-02-25 01:21:34.000000000 +0800
+@@ -2,7 +2,7 @@
+          <para>
+            Permission is granted to copy, distribute and/or modify this
+            document under the terms of the GNU Free Documentation
+-           License (GFDL), Version 1.1 or any later version published
++           License (GFDL), Version 1.2 or any later version published
+            by the Free Software Foundation with no Invariant Sections,
+            no Front-Cover Texts, and no Back-Cover Texts.  You can find
+            a copy of the GFDL at this <ulink type="help"
+@@ -73,4 +73,4 @@
+            </orderedlist>
+          </para>
+    </legalnotice>
+- 
+\ No newline at end of file
++ 
+diff -urNad stardict-3.0.1~/help/ru/legal.xml stardict-3.0.1/help/ru/legal.xml
+--- stardict-3.0.1~/help/ru/legal.xml	2008-02-25 00:56:55.000000000 +0800
++++ stardict-3.0.1/help/ru/legal.xml	2008-02-25 01:21:34.000000000 +0800
+@@ -2,7 +2,7 @@
+          <para>
+            Permission is granted to copy, distribute and/or modify this
+            document under the terms of the GNU Free Documentation
+-           License (GFDL), Version 1.1 or any later version published
++           License (GFDL), Version 1.2 or any later version published
+            by the Free Software Foundation with no Invariant Sections,
+            no Front-Cover Texts, and no Back-Cover Texts.  You can find
+            a copy of the GFDL at this <ulink type="help"
+@@ -73,4 +73,4 @@
+            </orderedlist>
+          </para>
+    </legalnotice>
+- 
+\ No newline at end of file
++ 
+diff -urNad stardict-3.0.1~/help/uk/legal.xml stardict-3.0.1/help/uk/legal.xml
+--- stardict-3.0.1~/help/uk/legal.xml	2008-02-25 00:56:55.000000000 +0800
++++ stardict-3.0.1/help/uk/legal.xml	2008-02-25 01:21:34.000000000 +0800
+@@ -2,7 +2,7 @@
+          <para>
+            Permission is granted to copy, distribute and/or modify this
+            document under the terms of the GNU Free Documentation
+-           License (GFDL), Version 1.1 or any later version published
++           License (GFDL), Version 1.2 or any later version published
+            by the Free Software Foundation with no Invariant Sections,
+            no Front-Cover Texts, and no Back-Cover Texts.  You can find
+            a copy of the GFDL at this <ulink type="help"
+@@ -73,4 +73,4 @@
+            </orderedlist>
+          </para>
+    </legalnotice>
+- 
+\ No newline at end of file
++ 
+diff -urNad stardict-3.0.1~/help/zh_CN/legal.xml stardict-3.0.1/help/zh_CN/legal.xml
+--- stardict-3.0.1~/help/zh_CN/legal.xml	2008-02-25 00:56:55.000000000 +0800
++++ stardict-3.0.1/help/zh_CN/legal.xml	2008-02-25 01:21:34.000000000 +0800
+@@ -2,7 +2,7 @@
+          <para>
+            Permission is granted to copy, distribute and/or modify this
+            document under the terms of the GNU Free Documentation
+-           License (GFDL), Version 1.1 or any later version published
++           License (GFDL), Version 1.2 or any later version published
+            by the Free Software Foundation with no Invariant Sections,
+            no Front-Cover Texts, and no Back-Cover Texts.  You can find
+            a copy of the GFDL at this <ulink type="help"
+@@ -73,4 +73,4 @@
+            </orderedlist>
+          </para>
+    </legalnotice>
+- 
+\ No newline at end of file
++ 
+diff -urNad stardict-3.0.1~/help/zh_TW/legal.xml stardict-3.0.1/help/zh_TW/legal.xml
+--- stardict-3.0.1~/help/zh_TW/legal.xml	2008-02-25 00:56:55.000000000 +0800
++++ stardict-3.0.1/help/zh_TW/legal.xml	2008-02-25 01:21:34.000000000 +0800
+@@ -2,7 +2,7 @@
+          <para>
+            Permission is granted to copy, distribute and/or modify this
+            document under the terms of the GNU Free Documentation
+-           License (GFDL), Version 1.1 or any later version published
++           License (GFDL), Version 1.2 or any later version published
+            by the Free Software Foundation with no Invariant Sections,
+            no Front-Cover Texts, and no Back-Cover Texts.  You can find
+            a copy of the GFDL at this <ulink type="help"
+@@ -73,4 +73,4 @@
+            </orderedlist>
+          </para>
+    </legalnotice>
+- 
+\ No newline at end of file
++ 
+diff -urNad stardict-3.0.1~/src/articleview.cpp stardict-3.0.1/src/articleview.cpp
+--- stardict-3.0.1~/src/articleview.cpp	2008-02-25 00:56:55.000000000 +0800
++++ stardict-3.0.1/src/articleview.cpp	2008-02-25 01:21:34.000000000 +0800
+@@ -11,11 +11,10 @@
+  * This program is distributed in the hope that it will be useful,
+  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+- * GNU Library General Public License for more details.
++ * GNU General Public License for more details.
+  *
+  * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
++ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  */
+ 
+ #ifdef HAVE_CONFIG_H
+diff -urNad stardict-3.0.1~/src/class_factory.cpp stardict-3.0.1/src/class_factory.cpp
+--- stardict-3.0.1~/src/class_factory.cpp	2008-02-25 00:56:55.000000000 +0800
++++ stardict-3.0.1/src/class_factory.cpp	2008-02-25 01:21:34.000000000 +0800
+@@ -11,11 +11,10 @@
+  * This program is distributed in the hope that it will be useful,
+  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+- * GNU Library General Public License for more details.
++ * GNU General Public License for more details.
+  *
+  * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
++ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  */
+ 
+ #ifdef HAVE_CONFIG_H
+diff -urNad stardict-3.0.1~/src/conf.cpp stardict-3.0.1/src/conf.cpp
+--- stardict-3.0.1~/src/conf.cpp	2008-02-25 00:56:55.000000000 +0800
++++ stardict-3.0.1/src/conf.cpp	2008-02-25 01:21:34.000000000 +0800
+@@ -10,11 +10,10 @@
+  * This program is distributed in the hope that it will be useful,
+  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+- * GNU Library General Public License for more details.
++ * GNU General Public License for more details.
+  *
+  * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
++ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  */
+ 
+ #ifdef HAVE_CONFIG_H
+diff -urNad stardict-3.0.1~/src/desktop.cpp stardict-3.0.1/src/desktop.cpp
+--- stardict-3.0.1~/src/desktop.cpp	2008-02-25 00:56:55.000000000 +0800
++++ stardict-3.0.1/src/desktop.cpp	2008-02-25 01:21:34.000000000 +0800
+@@ -11,11 +11,10 @@
+  * This program is distributed in the hope that it will be useful,
+  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+- * GNU Library General Public License for more details.
++ * GNU General Public License for more details.
+  *
+  * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
++ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  */
+ 
+ #ifdef HAVE_CONFIG_H
+diff -urNad stardict-3.0.1~/src/floatwin.cpp stardict-3.0.1/src/floatwin.cpp
+--- stardict-3.0.1~/src/floatwin.cpp	2008-02-25 00:56:55.000000000 +0800
++++ stardict-3.0.1/src/floatwin.cpp	2008-02-25 01:21:34.000000000 +0800
+@@ -10,11 +10,10 @@
+  * This program is distributed in the hope that it will be useful,
+  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+- * GNU Library General Public License for more details.
++ * GNU General Public License for more details.
+  *
+  * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
++ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  */
+ 
+ #ifdef HAVE_CONFIG_H
+diff -urNad stardict-3.0.1~/src/gconf_file.cpp stardict-3.0.1/src/gconf_file.cpp
+--- stardict-3.0.1~/src/gconf_file.cpp	2008-02-25 00:56:55.000000000 +0800
++++ stardict-3.0.1/src/gconf_file.cpp	2008-02-25 01:21:34.000000000 +0800
+@@ -11,11 +11,10 @@
+  * This program is distributed in the hope that it will be useful,
+  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+- * GNU Library General Public License for more details.
++ * GNU General Public License for more details.
+  *
+  * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
++ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  */
+ 
+ #ifdef HAVE_CONFIG_H
+diff -urNad stardict-3.0.1~/src/gtk_iskeyspressed.cpp stardict-3.0.1/src/gtk_iskeyspressed.cpp
+--- stardict-3.0.1~/src/gtk_iskeyspressed.cpp	2008-02-25 00:56:55.000000000 +0800
++++ stardict-3.0.1/src/gtk_iskeyspressed.cpp	2008-02-25 01:21:34.000000000 +0800
+@@ -12,11 +12,10 @@
+  * This program is distributed in the hope that it will be useful,
+  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+- * GNU Library General Public License for more details.
++ * GNU General Public License for more details.
+  *
+  * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
++ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  */
+ 
+ #ifdef HAVE_CONFIG_H
+diff -urNad stardict-3.0.1~/src/gtktextviewpango.cpp stardict-3.0.1/src/gtktextviewpango.cpp
+--- stardict-3.0.1~/src/gtktextviewpango.cpp	2008-02-25 00:56:55.000000000 +0800
++++ stardict-3.0.1/src/gtktextviewpango.cpp	2008-02-25 01:21:34.000000000 +0800
+@@ -11,11 +11,10 @@
+  * This program is distributed in the hope that it will be useful,
+  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+- * GNU Library General Public License for more details.
++ * GNU General Public License for more details.
+  *
+  * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
++ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  */
+ 
+ /*
+diff -urNad stardict-3.0.1~/src/inifile.cpp stardict-3.0.1/src/inifile.cpp
+--- stardict-3.0.1~/src/inifile.cpp	2008-02-25 00:56:55.000000000 +0800
++++ stardict-3.0.1/src/inifile.cpp	2008-02-25 01:21:34.000000000 +0800
+@@ -11,11 +11,10 @@
+  * This program is distributed in the hope that it will be useful,
+  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+- * GNU Library General Public License for more details.
++ * GNU General Public License for more details.
+  *
+  * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
++ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  */
+ 
+ #ifdef HAVE_CONFIG_H
+diff -urNad stardict-3.0.1~/src/lib/common.cpp stardict-3.0.1/src/lib/common.cpp
+--- stardict-3.0.1~/src/lib/common.cpp	2008-02-25 00:56:55.000000000 +0800
++++ stardict-3.0.1/src/lib/common.cpp	2008-02-25 01:21:34.000000000 +0800
+@@ -10,11 +10,10 @@
+  * This program is distributed in the hope that it will be useful,
+  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+- * GNU Library General Public License for more details.
++ * GNU General Public License for more details.
+  *
+  * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
++ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  */
+ 
+ /*
+diff -urNad stardict-3.0.1~/src/lib/data.cpp stardict-3.0.1/src/lib/data.cpp
+--- stardict-3.0.1~/src/lib/data.cpp	2008-02-25 00:56:55.000000000 +0800
++++ stardict-3.0.1/src/lib/data.cpp	2008-02-25 01:21:34.000000000 +0800
+@@ -10,11 +10,10 @@
+  * This program is distributed in the hope that it will be useful,
+  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+- * GNU Library General Public License for more details.
++ * GNU General Public License for more details.
+  *
+  * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
++ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  */
+ 
+ /* implementation of class to work with dictionary data */
+diff -urNad stardict-3.0.1~/src/lib/dict_client.cpp stardict-3.0.1/src/lib/dict_client.cpp
+--- stardict-3.0.1~/src/lib/dict_client.cpp	2008-02-25 00:56:55.000000000 +0800
++++ stardict-3.0.1/src/lib/dict_client.cpp	2008-02-25 01:21:34.000000000 +0800
+@@ -11,11 +11,10 @@
+  * This program is distributed in the hope that it will be useful,
+  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+- * GNU Library General Public License for more details.
++ * GNU General Public License for more details.
+  *
+  * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
++ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  */
+ 
+ /*
+diff -urNad stardict-3.0.1~/src/lib/dictziplib.cpp stardict-3.0.1/src/lib/dictziplib.cpp
+--- stardict-3.0.1~/src/lib/dictziplib.cpp	2008-02-25 00:56:55.000000000 +0800
++++ stardict-3.0.1/src/lib/dictziplib.cpp	2008-02-25 01:21:34.000000000 +0800
+@@ -17,11 +17,10 @@
+  *  This program is distributed in the hope that it will be useful,
+  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+- *  GNU Library General Public License for more details.
++ *  GNU General Public License for more details.
+  *
+  *  You should have received a copy of the GNU General Public License
+- *  along with this program; if not, write to the Free Software
+- *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
++ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  */
+ 
+ //#define HAVE_MMAP //it will defined in config.h. this can be done by configure.in with a AC_FUNC_MMAP.
+diff -urNad stardict-3.0.1~/src/lib/stardict_client.cpp stardict-3.0.1/src/lib/stardict_client.cpp
+--- stardict-3.0.1~/src/lib/stardict_client.cpp	2008-02-25 00:56:55.000000000 +0800
++++ stardict-3.0.1/src/lib/stardict_client.cpp	2008-02-25 01:21:34.000000000 +0800
+@@ -11,11 +11,10 @@
+  * This program is distributed in the hope that it will be useful,
+  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+- * GNU Library General Public License for more details.
++ * GNU General Public License for more details.
+  *
+  * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
++ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  */
+ 
+ #ifdef HAVE_CONFIG_H
+diff -urNad stardict-3.0.1~/src/lib/stddict.cpp stardict-3.0.1/src/lib/stddict.cpp
+--- stardict-3.0.1~/src/lib/stddict.cpp	2008-02-25 00:56:55.000000000 +0800
++++ stardict-3.0.1/src/lib/stddict.cpp	2008-02-25 01:21:34.000000000 +0800
+@@ -10,11 +10,10 @@
+  * This program is distributed in the hope that it will be useful,
+  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+- * GNU Library General Public License for more details.
++ * GNU General Public License for more details.
+  *
+  * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
++ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  */
+ 
+ /*
+diff -urNad stardict-3.0.1~/src/lib/treedict.cpp stardict-3.0.1/src/lib/treedict.cpp
+--- stardict-3.0.1~/src/lib/treedict.cpp	2008-02-25 00:56:55.000000000 +0800
++++ stardict-3.0.1/src/lib/treedict.cpp	2008-02-25 01:21:34.000000000 +0800
+@@ -10,11 +10,10 @@
+  * This program is distributed in the hope that it will be useful,
+  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+- * GNU Library General Public License for more details.
++ * GNU General Public License for more details.
+  *
+  * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
++ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  */
+ 
+ /*
+diff -urNad stardict-3.0.1~/src/mainwin.cpp stardict-3.0.1/src/mainwin.cpp
+--- stardict-3.0.1~/src/mainwin.cpp	2008-02-25 00:56:55.000000000 +0800
++++ stardict-3.0.1/src/mainwin.cpp	2008-02-25 01:21:34.000000000 +0800
+@@ -10,11 +10,10 @@
+  * This program is distributed in the hope that it will be useful,
+  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+- * GNU Library General Public License for more details.
++ * GNU General Public License for more details.
+  *
+  * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
++ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  */
+ 
+ #ifdef HAVE_CONFIG_H
+diff -urNad stardict-3.0.1~/src/pangoview.cpp stardict-3.0.1/src/pangoview.cpp
+--- stardict-3.0.1~/src/pangoview.cpp	2008-02-25 00:56:55.000000000 +0800
++++ stardict-3.0.1/src/pangoview.cpp	2008-02-25 01:21:34.000000000 +0800
+@@ -11,11 +11,10 @@
+  * This program is distributed in the hope that it will be useful,
+  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+- * GNU Library General Public License for more details.
++ * GNU General Public License for more details.
+  *
+  * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
++ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  */
+ 
+ #ifdef HAVE_CONFIG_H
+diff -urNad stardict-3.0.1~/src/prefsdlg.cpp stardict-3.0.1/src/prefsdlg.cpp
+--- stardict-3.0.1~/src/prefsdlg.cpp	2008-02-25 00:56:55.000000000 +0800
++++ stardict-3.0.1/src/prefsdlg.cpp	2008-02-25 01:21:34.000000000 +0800
+@@ -10,11 +10,10 @@
+  * This program is distributed in the hope that it will be useful,
+  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+- * GNU Library General Public License for more details.
++ * GNU General Public License for more details.
+  *
+  * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
++ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  */
+ 
+ #ifdef HAVE_CONFIG_H
+diff -urNad stardict-3.0.1~/src/progresswin.cpp stardict-3.0.1/src/progresswin.cpp
+--- stardict-3.0.1~/src/progresswin.cpp	2008-02-25 00:56:55.000000000 +0800
++++ stardict-3.0.1/src/progresswin.cpp	2008-02-25 01:21:34.000000000 +0800
+@@ -11,11 +11,10 @@
+  * This program is distributed in the hope that it will be useful,
+  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+- * GNU Library General Public License for more details.
++ * GNU General Public License for more details.
+  *
+  * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
++ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  */
+ 
+ #ifdef HAVE_CONFIG_H
+diff -urNad stardict-3.0.1~/src/skin.cpp stardict-3.0.1/src/skin.cpp
+--- stardict-3.0.1~/src/skin.cpp	2008-02-25 00:56:55.000000000 +0800
++++ stardict-3.0.1/src/skin.cpp	2008-02-25 01:21:34.000000000 +0800
+@@ -10,11 +10,10 @@
+  * This program is distributed in the hope that it will be useful,
+  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+- * GNU Library General Public License for more details.
++ * GNU General Public License for more details.
+  *
+  * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
++ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  */
+ 
+ #ifdef HAVE_CONFIG_H
+diff -urNad stardict-3.0.1~/src/splash.cpp stardict-3.0.1/src/splash.cpp
+--- stardict-3.0.1~/src/splash.cpp	2008-02-25 00:56:55.000000000 +0800
++++ stardict-3.0.1/src/splash.cpp	2008-02-25 01:21:34.000000000 +0800
+@@ -10,11 +10,10 @@
+  * This program is distributed in the hope that it will be useful,
+  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+- * GNU Library General Public License for more details.
++ * GNU General Public License for more details.
+  *
+  * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
++ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  */
+ 
+ #ifdef HAVE_CONFIG_H
+diff -urNad stardict-3.0.1~/src/stardict.cpp stardict-3.0.1/src/stardict.cpp
+--- stardict-3.0.1~/src/stardict.cpp	2007-11-05 11:39:51.000000000 +0800
++++ stardict-3.0.1/src/stardict.cpp	2008-02-25 01:21:34.000000000 +0800
+@@ -10,7 +10,7 @@
+  *  This program is distributed in the hope that it will be useful,
+  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+- *  GNU Library General Public License for more details.
++ *  GNU General Public License for more details.
+  *
+  *  You should have received a copy of the GNU General Public License
+  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+diff -urNad stardict-3.0.1~/src/tray.cpp stardict-3.0.1/src/tray.cpp
+--- stardict-3.0.1~/src/tray.cpp	2008-02-25 00:56:55.000000000 +0800
++++ stardict-3.0.1/src/tray.cpp	2008-02-25 01:21:34.000000000 +0800
+@@ -11,11 +11,10 @@
+  * This program is distributed in the hope that it will be useful,
+  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+- * GNU Library General Public License for more details.
++ * GNU General Public License for more details.
+  *
+  * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
++ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  */
+ 
+ #ifdef HAVE_CONFIG_H
+diff -urNad stardict-3.0.1~/src/utils.cpp stardict-3.0.1/src/utils.cpp
+--- stardict-3.0.1~/src/utils.cpp	2008-02-25 00:56:55.000000000 +0800
++++ stardict-3.0.1/src/utils.cpp	2008-02-25 01:21:34.000000000 +0800
+@@ -11,11 +11,10 @@
+  * This program is distributed in the hope that it will be useful,
+  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+- * GNU Library General Public License for more details.
++ * GNU General Public License for more details.
+  *
+  * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
++ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  */
+ 
+ #ifdef HAVE_CONFIG_H
+diff -urNad stardict-3.0.1~/src/win32/acrobat/sources/wordPickInit.cpp stardict-3.0.1/src/win32/acrobat/sources/wordPickInit.cpp
+--- stardict-3.0.1~/src/win32/acrobat/sources/wordPickInit.cpp	2007-07-10 15:16:04.000000000 +0800
++++ stardict-3.0.1/src/win32/acrobat/sources/wordPickInit.cpp	2008-02-25 01:21:34.000000000 +0800
+@@ -17,7 +17,7 @@
+  * This program is distributed in the hope that it will be useful,
+  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+- * GNU Library General Public License for more details.
++ * GNU General Public License for more details.
+  *
+  * You should have received a copy of the GNU General Public License
+  * along with this program; if not, write to the Free Software
+diff -urNad stardict-3.0.1~/src/win32/acrobat/sources/wordPickUI.cpp stardict-3.0.1/src/win32/acrobat/sources/wordPickUI.cpp
+--- stardict-3.0.1~/src/win32/acrobat/sources/wordPickUI.cpp	2007-07-10 15:16:04.000000000 +0800
++++ stardict-3.0.1/src/win32/acrobat/sources/wordPickUI.cpp	2008-02-25 01:21:34.000000000 +0800
+@@ -17,7 +17,7 @@
+  * This program is distributed in the hope that it will be useful,
+  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+- * GNU Library General Public License for more details.
++ * GNU General Public License for more details.
+  *
+  * You should have received a copy of the GNU General Public License
+  * along with this program; if not, write to the Free Software
+@@ -280,4 +280,4 @@
+ 		}
+ 	}
+ 	return;
+-}
+\ No newline at end of file
++}
+diff -urNad stardict-3.0.1~/src/win32/acrobat/sources/wordPickUI.h stardict-3.0.1/src/win32/acrobat/sources/wordPickUI.h
+--- stardict-3.0.1~/src/win32/acrobat/sources/wordPickUI.h	2007-07-10 15:16:04.000000000 +0800
++++ stardict-3.0.1/src/win32/acrobat/sources/wordPickUI.h	2008-02-25 01:21:34.000000000 +0800
+@@ -17,7 +17,7 @@
+  * This program is distributed in the hope that it will be useful,
+  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+- * GNU Library General Public License for more details.
++ * GNU General Public License for more details.
+  *
+  * You should have received a copy of the GNU General Public License
+  * along with this program; if not, write to the Free Software
+diff -urNad stardict-3.0.1~/src/win32/mouseover.cpp stardict-3.0.1/src/win32/mouseover.cpp
+--- stardict-3.0.1~/src/win32/mouseover.cpp	2007-07-10 15:16:04.000000000 +0800
++++ stardict-3.0.1/src/win32/mouseover.cpp	2008-02-25 01:21:34.000000000 +0800
+@@ -12,11 +12,10 @@
+  * This program is distributed in the hope that it will be useful,
+  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+- * GNU Library General Public License for more details.
++ * GNU General Public License for more details.
+  *
+  * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
++ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  */
+ 
+ #ifdef HAVE_CONFIG_H
+diff -urNad stardict-3.0.1~/src/x11_iskeyspressed.cpp stardict-3.0.1/src/x11_iskeyspressed.cpp
+--- stardict-3.0.1~/src/x11_iskeyspressed.cpp	2008-02-25 00:56:55.000000000 +0800
++++ stardict-3.0.1/src/x11_iskeyspressed.cpp	2008-02-25 01:21:34.000000000 +0800
+@@ -12,11 +12,10 @@
+  * This program is distributed in the hope that it will be useful,
+  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+- * GNU Library General Public License for more details.
++ * GNU General Public License for more details.
+  *
+  * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
++ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  */
+ 
+ /*

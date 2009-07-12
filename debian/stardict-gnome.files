@@ -1,0 +1,6 @@
+usr/bin/stardict
+usr/lib/bonobo/servers/GNOME_Stardict.server
+usr/share/idl/*
+usr/share/gnome/*
+usr/share/gconf/schemas/*
+etc/gconf/schemas/*

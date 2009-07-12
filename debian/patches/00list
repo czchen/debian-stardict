@@ -1,0 +1,7 @@
+01_festival-tts-plugin
+02_makefile
+03_license-updates
+04_changelog-minor-typo-fixes
+05_g++-4.4.dpatch
+06_new_gucharmap.dpatch
+07_disable_netdict.dpatch
