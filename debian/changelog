@@ -1,3 +1,12 @@
+stardict (3.0.1-6) unstable; urgency=low
+
+  * Added a pseudo binary package named stardic for user of stardic can
+    upgrade to stardict smoothly.
+  * debian/control:
+    - replaced scrollkeeper with rarian-compat as build-depends
+
+ -- Andrew Lee (李健秋) <ajqlee@debian.org>  Fri, 24 Jul 2009 00:38:44 +0200
+
 stardict (3.0.1-5) unstable; urgency=high
 
   * Applied 07_disable_netdict.dpatch: (Closes:#534731) CVE-2009-2260

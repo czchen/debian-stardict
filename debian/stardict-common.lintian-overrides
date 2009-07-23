@@ -3,3 +3,10 @@
 #
 stardict-common: package-contains-empty-directory usr/share/stardict/dic/
 stardict-common: package-contains-empty-directory usr/share/stardict/treedict/
+#
+# The stardict-common corss depends on both stardict | stardict-gtk binary 
+# packages which both provide 'stardict' executable binary, so we put 
+# .desktop and debain menu entry in stardict-common.
+#
+stardict-common: desktop-command-not-in-package /usr/share/applications/stardict.desktop stardict
+stardict-common: menu-command-not-in-package /usr/share/menu/stardict-common:9 /usr/bin/stardict
