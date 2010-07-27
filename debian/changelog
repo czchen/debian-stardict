@@ -4,8 +4,12 @@ stardict (3.0.1-7) unstable; urgency=low
     - Convert all patches from dpatch to quilt 
     - Drop dpatch from build-depends
   * Added Vcs-Git and Vcs-Browser tags
+  * Make stardict-plugin-* depends on stardict-plugin (= ${binary:Version})
+    (Closes:#570716)
+  * Build-depends on libestools2.0-dev (Closes:#590373)
+  * Bumped Standard-Version to 3.9.0
 
- -- Andrew Lee (李健秋) <ajqlee@debian.org>  Tue, 27 Jul 2010 11:25:45 -0400
+ -- Andrew Lee (李健秋) <ajqlee@debian.org>  Tue, 27 Jul 2010 14:07:18 -0400
 
 stardict (3.0.1-6) unstable; urgency=low
 
