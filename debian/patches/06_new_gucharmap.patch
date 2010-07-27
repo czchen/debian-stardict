@@ -1,0 +1,25 @@
+Author: Steve Kowalik <stevenk@ubuntu.com>
+Description: Correct pkg-config name for gucharmap, and correct some code changes
+with the new version of the library.
+--- a/configure.in
++++ b/configure.in
+@@ -76,7 +76,7 @@
+ 	[enable_gucharmap=yes])
+ 
+ if test "x$enable_gucharmap" = "xyes" ; then
+-	PKG_CHECK_MODULES(GUCHARMAP, [gucharmap >= 1.4.0], have_gucharmap=yes, have_gucharmap=no)
++	PKG_CHECK_MODULES(GUCHARMAP, [gucharmap-2 >= 1.4.0], have_gucharmap=yes, have_gucharmap=no)
+ 	if test "x$have_gucharmap" = "xyes"; then
+ 		GUCHARMAP_CFLAGS="${GUCHARMAP_CFLAGS}"
+ 		GUCHARMAP_LIBS="${GUCHARMAP_LIBS}"
+--- a/stardict-plugins/stardict-gucharmap-plugin/stardict_gucharmap.cpp
++++ b/stardict-plugins/stardict-gucharmap-plugin/stardict_gucharmap.cpp
+@@ -237,7 +237,7 @@
+ 	/* canonical decomposition */
+ 	gunichar *decomposition;
+ 	gsize result_len;
+-	decomposition = gucharmap_unicode_canonical_decomposition (uc, &result_len);
++	decomposition = g_unicode_canonical_decomposition (uc, &result_len);
+ 	if (result_len != 1) {
+ 		definition += _("Canonical decomposition:");
+ 		definition += " ";

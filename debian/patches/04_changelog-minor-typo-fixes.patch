@@ -1,13 +1,7 @@
-#! /bin/sh /usr/share/dpatch/dpatch-run
-## 04_changelog-minor-typo-fixes.dpatch by Anthony Fok <foka@debian.org>
-##
-## All lines beginning with `## DP:' are a description of the patch.
-## DP: Minor typo fixes to upstream ChangeLog.
-
-@DPATCH@
-
---- stardict-3.0.1.orig/ChangeLog
-+++ stardict-3.0.1/ChangeLog
+Author: Anthony Fok <foka@debian.org>
+Description: Minor typo fixes to upstream ChangeLog.
+--- a/ChangeLog
++++ b/ChangeLog
 @@ -12,7 +12,7 @@
  
  2007.8.13
