@@ -16,8 +16,7 @@ Architecture: all
 Depends: ${shlibs:Depends}, ${misc:Depends}, stardict-gtk (>= ${source:Version}) | stardict-gnome (>= ${source:Version})
 Provides: stardic
 Replaces: stardic
-Conflict: stardic
-Description: International dictionary 
+Description: International dictionary
  StarDict is a cross-platform and international dictionary written in
  GTK+ 2.x.  It has powerful features such as "Glob-style pattern
  matching", "Scan selection word", "Fuzzy search", etc.
@@ -99,7 +98,7 @@ Description: International dictionary - spell plugin
  It has powerful features such as "Glob-style pattern matching",
  "Scan selection word", "Fuzzy search", etc.
  .
- This package contains spell plugin for StarDict which give you 
+ This package contains spell plugin for StarDict which give you
  spelling suggestion while you searching the dictionary.
 
 Package: stardict-plugin
