@@ -1,0 +1,26 @@
+Description: Fix FTBFS with binutils-gold by adding several modules in Makefile.am
+Author: Mahyuddin Susanto <udienz@gmail.com>
+Bug-Ubuntu: https://bugs.launchpad.net/bugs/701476
+
+--- stardict-3.0.1.orig/tests/Makefile.am
++++ stardict-3.0.1/tests/Makefile.am
+@@ -45,7 +45,7 @@ t_articleview_SOURCES = t_articleview.cp
+ t_xml_SOURCES = t_xml.cpp
+ 
+ LDADD = @STARDICT_LIBS@ $(top_builddir)/src/lib/libstardict.a \
+-	$(LOCAL_SIGCPP_LIBFILE)
++	$(LOCAL_SIGCPP_LIBFILE) -lz -lglib-2.0
+ INCLUDES = @STARDICT_CFLAGS@ $(LOCAL_SIGCPP_INCLUDE) -I$(top_builddir) -I$(top_builddir)/src -I$(top_builddir)/src/lib
+ 
+ TESTS = \
+--- stardict-3.0.1.orig/src/Makefile.am
++++ stardict-3.0.1/src/Makefile.am
+@@ -26,7 +26,7 @@ INCLUDES =
+ 
+ stardict_DEPENDENCIES = $(LOCAL_SIGCPP_LIBFILE) lib/libstardict.a
+ stardict_LDFLAGS = 
+-stardict_LDADD = $(STARDICT_LIBS) $(LOCAL_SIGCPP_LIBFILE) lib/libstardict.a
++stardict_LDADD = $(STARDICT_LIBS) $(LOCAL_SIGCPP_LIBFILE) lib/libstardict.a -lgmodule-2.0 -lz
+ 
+ if !GNOME_SUPPORT
+ if MAEMO_SUPPORT
