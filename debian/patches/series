@@ -5,3 +5,4 @@
 05_g++-4.4.patch
 06_new_gucharmap.patch
 07_disable_netdict.patch
+08_gcc-4.6.patch
