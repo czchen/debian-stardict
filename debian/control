@@ -3,7 +3,7 @@ Section: utils
 Priority: optional
 Maintainer: Andrew Lee (李健秋) <ajqlee@debian.org>
 Uploaders: Anthony Fok <foka@debian.org>
-Build-Depends: debhelper (>= 5.0.51), libgnomeui-dev, libbonobo2-dev, libgconf2-dev, liborbit2-dev, zlib1g-dev, sharutils, libxml-parser-perl, libx11-dev, x11proto-core-dev, libenchant-dev, libgucharmap2-dev, libespeak-dev, festival-dev, libestools2.0-dev, rarian-compat, libtool, intltool, autoconf, automake (>= 1.10), autotools-dev, libsigc++-2.0-dev (>= 2.0.18-2)
+Build-Depends: debhelper (>= 8), libgnomeui-dev, libbonobo2-dev, libgconf2-dev, liborbit2-dev, zlib1g-dev, sharutils, libxml-parser-perl, libx11-dev, x11proto-core-dev, libenchant-dev, libgucharmap2-dev, libespeak-dev, festival-dev, libestools2.0-dev, rarian-compat, libtool, intltool, autoconf, automake (>= 1.10), autotools-dev, libsigc++-2.0-dev (>= 2.0.18-2)
 Build-Conflicts: autoconf2.13, automake1.4
 Standards-Version: 3.9.0
 Homepage: http://stardict.sourceforge.net/
