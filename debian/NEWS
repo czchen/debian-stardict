@@ -1,8 +1,8 @@
 stardict (3.0.1-5) unstable; urgency=high
 
-  * CVE-2009-2260: 
+  * CVE-2009-2260:
     http://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2009-2260
- 
+
     Disable Net.CN plugin by default since this revision.
 
  -- Andrew Lee <andrew@linux.org.tw>  Sun, 12 Jul 2009 20:12:40 +0800

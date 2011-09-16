@@ -1,7 +1,7 @@
 stardict (3.0.1-7) unstable; urgency=low
 
   * Convert to 3.0 (quilt) format
-    - Convert all patches from dpatch to quilt 
+    - Convert all patches from dpatch to quilt
     - Drop dpatch from build-depends
   * Added Vcs-Git and Vcs-Browser tags
   * Make stardict-plugin-* depends on stardict-plugin (= ${binary:Version})
@@ -30,7 +30,7 @@ stardict (3.0.1-5) unstable; urgency=high
   * debian/control:
     - Added proper ${misc:Depends}
     - Replaced build-depends scrollkeeper with rarian-compat
-    - Bumped Standard-version to 3.8.2 
+    - Bumped Standard-version to 3.8.2
   * debian/rules:
     - Drop deprecated dh_scrollkeeper
 
@@ -39,7 +39,7 @@ stardict (3.0.1-5) unstable; urgency=high
 stardict (3.0.1-4.1) unstable; urgency=low
 
   * Non-maintainer upload.
-  * 06_new_gucharmap.dpatch: patch stolen from Ubuntu. Update StarDict 
+  * 06_new_gucharmap.dpatch: patch stolen from Ubuntu. Update StarDict
     to work with the latest gucharmap. Closes: #521071.
 
  -- Josselin Mouette <joss@debian.org>  Sat, 25 Apr 2009 12:34:41 +0200
@@ -54,7 +54,7 @@ stardict (3.0.1-4) unstable; urgency=low
   * Add build-dependency: libsigc++-2.0-dev (>= 2.0.18-2)
   * Merged NMU patch from Mert Dirik <mertdirik@gmail.com>
   * Bumped Standards-Version to 3.8.0.0
-    - Supporting the standardized environment variable 
+    - Supporting the standardized environment variable
       `DEB_BUILD_OPTIONS' for parallel builds.
 
  -- Andrew Lee <andrew@linux.org.tw>  Wed, 02 Jul 2008 18:50:52 +0800
@@ -70,7 +70,7 @@ stardict (3.0.1-2) unstable; urgency=low
   * debian/rules: (Closes:#470020)
     - Added missing option --disable-gnome-support for stardict-gtk.
   * debian/control:
-    - build-depends on libsigc++-2.0-dev (Closes:#468071) thanks 
+    - build-depends on libsigc++-2.0-dev (Closes:#468071) thanks
       Ying-Chun Liu (PaulLiu) <grandpaul@gmail.com> for this tip.
 
  -- Andrew Lee <andrew@linux.org.tw>  Wed, 19 Mar 2008 17:14:36 +0800
@@ -113,13 +113,13 @@ stardict (3.0.1-1) unstable; urgency=low
 stardict (3.0.0-3) unstable; urgency=low
 
   * Applied 05_espeak.dpatch (Closes:#447372), thanks upstream author
-    Hu Zheng <huzheng001@gmail.com> give me this patch. 
+    Hu Zheng <huzheng001@gmail.com> give me this patch.
 
  -- Andrew Lee <andrew@linux.org.tw>  Thu, 25 Oct 2007 01:35:29 +0800
 
 stardict (3.0.0-2) unstable; urgency=low
 
-  * Applied 04_floatwin.dpatch (fix hpaned width probelm and po file 
+  * Applied 04_floatwin.dpatch (fix hpaned width probelm and po file
     update) by upstream author Hu Zheng <huzheng001@gmail.com>
   * debian/control:
     - dh_icons needs debhelper (>= 5.0.51)
@@ -137,7 +137,7 @@ stardict (3.0.0-1) unstable; urgency=low
       for both stardict and stardict-gtk
     - Correct folder name 'treedict' for tree dictionaries(Closes:#392529)
   * stardict-gtk
-    - Added 01_stardict-gtk.dpatch (Reference to the patch from 
+    - Added 01_stardict-gtk.dpatch (Reference to the patch from
       Zhang Le <r0bertz@gentoo.org> on upstream's BTS.)
     - BuildDepends on dpatch, libtool, intltool, autoconf, automake1.9,
       autotools-dev
@@ -159,7 +159,7 @@ stardict (3.0.0-1) unstable; urgency=low
 stardict (2.4.8-1) unstable; urgency=low
 
   * Co-maintainer upload, agreed by Roy Chan.
-  * Update package to the last python policy by 
+  * Update package to the last python policy by
     Pierre Habouzit <madcoder@debian.org>(Closes: 380962).
 
  -- Andrew Lee <andrew@linux.org.tw>  Tue,  5 Sep 2006 17:12:22 +0800
@@ -248,7 +248,7 @@ stardict (2.4.5-0.1) unstable; urgency=low
   * Suggests: sdcv, the console version of StarDict packaged by Cai Qian.
   * Fixed Lintian warnings:
     - Removed bashism in postinst: "-a" in "[" test.
-    - Updated FSF address in copyright file.  
+    - Updated FSF address in copyright file.
 
  -- Anthony Fok <foka@debian.org>  Tue,  4 Oct 2005 03:47:21 +0800
 
@@ -353,7 +353,7 @@ stardic (1.3.1-3) unstable; urgency=low
 
 stardic (1.3.1-2.1) unstable; urgency=low
 
-  * NMU 
+  * NMU
   * Fixed gcc 3.0 compiling problem. (closes:Bug#105008)
 
  -- Yu Guanghui <ygh@debian.org>  Sun, 22 Jul 2001 15:54:18 +0800
