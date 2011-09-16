@@ -1,3 +1,19 @@
+stardict (3.0.1-8) unstable; urgency=low
+
+  * Applied 08_gcc-4.6.patch from BTS.
+    Thanks Ilya Barygin <barygin@gmail.com>. (Closes: #624939)
+  * Applied 08_fix_ftbfs_binutils_gold.patch from BTS.
+    Thanks Mahyuddin Susanto <udienz@gmail.com>. (Closes: #609675)
+  * Convert debian/rules to debhelper 8 format. Convert .files to .install.
+  * Removing conflict on obsolete stardic package.
+  * Removing useless whitespaces at EOL and EOF.
+  * Sorting and warpping build-depends.
+  * Bumped Standard-version to 3.9.2.
+  * Correct an entry in lintian-overrides file.
+  * Releasing debian version 3.0.1-8.
+
+ -- Andrew Lee (李健秋) <ajqlee@debian.org>  Thu, 22 Sep 2011 16:21:08 +0800
+
 stardict (3.0.1-7) unstable; urgency=low
 
   * Convert to 3.0 (quilt) format
