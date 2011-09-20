@@ -10,7 +10,7 @@ Build-Depends:
  libsigc++-2.0-dev (>= 2.0.18-2), libtool, libx11-dev, libxml-parser-perl,
  festival-dev, rarian-compat, sharutils, x11proto-core-dev, zlib1g-dev
 Build-Conflicts: autoconf2.13, automake1.4
-Standards-Version: 3.9.0
+Standards-Version: 3.9.2
 Homepage: http://stardict.sourceforge.net/
 Vcs-Git: git://git.debian.org/git/collab-maint/stardict.git
 Vcs-Browser: http://git.debian.org/?p=collab-maint/stardict.git;a=summary
