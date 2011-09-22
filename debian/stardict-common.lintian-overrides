@@ -9,4 +9,5 @@ stardict-common: package-contains-empty-directory usr/share/stardict/treedict/
 # .desktop and debain menu entry in stardict-common.
 #
 stardict-common: desktop-command-not-in-package /usr/share/applications/stardict.desktop stardict
-stardict-common: menu-command-not-in-package /usr/share/menu/stardict-common:9 /usr/bin/stardict
+stardict-common: menu-command-not-in-package usr/share/menu/stardict-common:9 usr/bin/stardict
+
