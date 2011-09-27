@@ -32,7 +32,7 @@ Package: stardict-gnome
 Architecture: any
 Depends:
  ${misc:Depends}, ${shlibs:Depends}, stardict-common (= ${source:Version})
-Recommends: stardict-plugin-espeak (= ${binary:Version}), stardict-plugin-festival (= ${binary:Version}), stardict-plugin-gucharmap (= ${binary:Version}), stardict-plugin (= ${binary:Version})
+Recommends: stardict-plugin (= ${binary:Version}), stardict-plugin-espeak (= ${binary:Version}), stardict-plugin-festival (= ${binary:Version}), stardict-plugin-gucharmap (= ${binary:Version})
 Suggests: ttf-freefont, ttf-arphic-uming
 Replaces: stardict-gtk, stardict (<< 3.0.1-1)
 Conflicts: stardict-gtk, stardict (<< 3.0.1-1)
@@ -51,7 +51,7 @@ Package: stardict-gtk
 Architecture: any
 Depends:
  ${misc:Depends}, ${shlibs:Depends}, stardict-common (= ${source:Version})
-Recommends: stardict-plugin-espeak (= ${binary:Version}), stardict-plugin-festival (= ${binary:Version}), stardict-plugin (= ${binary:Version})
+Recommends: stardict-plugin (= ${binary:Version}), stardict-plugin-espeak (= ${binary:Version}), stardict-plugin-festival (= ${binary:Version})
 Suggests: ttf-freefont, ttf-arphic-uming
 Replaces: stardict-gnome, stardict (<< 3.0.1-1)
 Conflicts: stardict-gnome, stardict (<< 3.0.1-1)
