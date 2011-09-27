@@ -153,6 +153,8 @@ Architecture: all
 Depends: ${misc:Depends}, rarian-compat, sgml-data (>= 2.0.2)
 Recommends:
  stardict-gnome (>= ${source:Version}) | stardict-gtk (>= ${source:Version})
+Conflicts: stardict-gnome (= 3.0.1-8), stardict-gtk (= 3.0.1-8)
+Replaces: stardict-gnome (= 3.0.1-8), stardict-gtk (= 3.0.1-8)
 Description: International dictionary - data files
  StarDict is a cross-platform and international written in GTK+ 2.x.
  It has powerful features such as "Glob-style pattern matching",
