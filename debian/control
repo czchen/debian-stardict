@@ -38,8 +38,8 @@ Recommends:
  stardict-plugin-festival (= ${binary:Version}),
  stardict-plugin-gucharmap (= ${binary:Version})
 Suggests: ttf-freefont, ttf-arphic-uming
-Replaces: stardict-gtk, stardict (<< 3.0.1-1)
-Conflicts: stardict-gtk, stardict (<< 3.0.1-1)
+Replaces: stardict-gtk
+Conflicts: stardict-gtk
 Provides: stardict
 Description: International dictionary for GNOME 2
  StarDict is a cross-platform and international dictionary written in
@@ -60,8 +60,8 @@ Recommends:
  stardict-plugin-espeak (= ${binary:Version}),
  stardict-plugin-festival (= ${binary:Version})
 Suggests: ttf-freefont, ttf-arphic-uming
-Replaces: stardict-gnome, stardict (<< 3.0.1-1)
-Conflicts: stardict-gnome, stardict (<< 3.0.1-1)
+Replaces: stardict-gnome
+Conflicts: stardict-gnome
 Provides: stardict
 Description: International dictionary written in GTK+ 2.x
  StarDict is a cross-platform and international dictionary written in
