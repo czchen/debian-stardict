@@ -18,7 +18,9 @@ Vcs-Browser: http://git.debian.org/?p=collab-maint/stardict.git;a=summary
 
 Package: stardict
 Architecture: all
-Depends: ${misc:Depends}, ${shlibs:Depends}, stardict-gnome (>= ${source:Version}) | stardict-gtk (>= ${source:Version})
+Depends:
+ ${misc:Depends}, ${shlibs:Depends},
+ stardict-gnome (>= ${source:Version}) | stardict-gtk (>= ${source:Version})
 Provides: stardic
 Replaces: stardic
 Description: International dictionary
@@ -28,7 +30,8 @@ Description: International dictionary
 
 Package: stardict-gnome
 Architecture: any
-Depends: ${misc:Depends}, ${shlibs:Depends}, stardict-common (= ${source:Version})
+Depends:
+ ${misc:Depends}, ${shlibs:Depends}, stardict-common (= ${source:Version})
 Recommends: stardict-plugin-espeak (= ${binary:Version}), stardict-plugin-festival (= ${binary:Version}), stardict-plugin-gucharmap (= ${binary:Version}), stardict-plugin (= ${binary:Version})
 Suggests: ttf-freefont, ttf-arphic-uming
 Replaces: stardict-gtk, stardict (<< 3.0.1-1)
@@ -46,7 +49,8 @@ Description: International dictionary for GNOME 2
 
 Package: stardict-gtk
 Architecture: any
-Depends: ${misc:Depends}, ${shlibs:Depends}, stardict-common (= ${source:Version})
+Depends:
+ ${misc:Depends}, ${shlibs:Depends}, stardict-common (= ${source:Version})
 Recommends: stardict-plugin-espeak (= ${binary:Version}), stardict-plugin-festival (= ${binary:Version}), stardict-plugin (= ${binary:Version})
 Suggests: ttf-freefont, ttf-arphic-uming
 Replaces: stardict-gnome, stardict (<< 3.0.1-1)
@@ -64,7 +68,10 @@ Description: International dictionary written in GTK+ 2.x
 
 Package: stardict-plugin-espeak
 Architecture: any
-Depends: ${misc:Depends}, ${shlibs:Depends}, stardict-common (= ${source:Version}), stardict-gnome (= ${binary:Version}) | stardict-gtk (= ${binary:Version}), stardict-plugin (= ${binary:Version})
+Depends:
+ ${misc:Depends}, ${shlibs:Depends}, stardict-common (= ${source:Version}),
+ stardict-gnome (= ${binary:Version}) | stardict-gtk (= ${binary:Version}),
+ stardict-plugin (= ${binary:Version})
 Description: International dictionary - eSpeak TTS plugin
  StarDict is a cross-platform and international written in GTK+ 2.x.
  It has powerful features such as "Glob-style pattern matching",
@@ -75,7 +82,10 @@ Description: International dictionary - eSpeak TTS plugin
 
 Package: stardict-plugin-festival
 Architecture: any
-Depends: ${misc:Depends}, ${shlibs:Depends}, stardict-common (= ${source:Version}), stardict-gnome (= ${binary:Version}) | stardict-gtk (= ${binary:Version}), stardict-plugin (= ${binary:Version})
+Depends:
+ ${misc:Depends}, ${shlibs:Depends}, stardict-common (= ${source:Version}),
+ stardict-gnome (= ${binary:Version}) | stardict-gtk (= ${binary:Version}),
+ stardict-plugin (= ${binary:Version})
 Description: International dictionary - Festival TTS plugin
  StarDict is a cross-platform and international written in GTK+ 2.x.
  It has powerful features such as "Glob-style pattern matching",
@@ -86,7 +96,10 @@ Description: International dictionary - Festival TTS plugin
 
 Package: stardict-plugin-gucharmap
 Architecture: any
-Depends: ${misc:Depends}, ${shlibs:Depends}, stardict-common (= ${source:Version}), stardict-gnome (= ${binary:Version}) | stardict-gtk (= ${binary:Version}), stardict-plugin (= ${binary:Version})
+Depends:
+ ${misc:Depends}, ${shlibs:Depends}, stardict-common (= ${source:Version}),
+ stardict-gnome (= ${binary:Version}) | stardict-gtk (= ${binary:Version}),
+ stardict-plugin (= ${binary:Version})
 Description: International dictionary - gucharmap plugin
  StarDict is a cross-platform and international written in GTK+ 2.x.
  It has powerful features such as "Glob-style pattern matching",
@@ -97,7 +110,10 @@ Description: International dictionary - gucharmap plugin
 
 Package: stardict-plugin-spell
 Architecture: any
-Depends: ${misc:Depends}, ${shlibs:Depends}, stardict-common (= ${source:Version}), stardict-gnome (= ${binary:Version}) | stardict-gtk (= ${binary:Version}), stardict-plugin (= ${binary:Version})
+Depends:
+ ${misc:Depends}, ${shlibs:Depends}, stardict-common (= ${source:Version}),
+ stardict-gnome (= ${binary:Version}) | stardict-gtk (= ${binary:Version}),
+ stardict-plugin (= ${binary:Version})
 Description: International dictionary - spell plugin
  StarDict is a cross-platform and international written in GTK+ 2.x.
  It has powerful features such as "Glob-style pattern matching",
@@ -108,7 +124,9 @@ Description: International dictionary - spell plugin
 
 Package: stardict-plugin
 Architecture: any
-Depends: ${misc:Depends}, ${shlibs:Depends}, stardict-common (= ${source:Version}), stardict-gnome (= ${binary:Version}) | stardict-gtk (= ${binary:Version})
+Depends:
+ ${misc:Depends}, ${shlibs:Depends}, stardict-common (= ${source:Version}),
+ stardict-gnome (= ${binary:Version}) | stardict-gtk (= ${binary:Version})
 Description: International dictionary - common plugins
  StarDict is a cross-platform and international written in GTK+ 2.x.
  It has powerful features such as "Glob-style pattern matching",
