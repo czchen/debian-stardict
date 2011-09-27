@@ -32,7 +32,11 @@ Package: stardict-gnome
 Architecture: any
 Depends:
  ${misc:Depends}, ${shlibs:Depends}, stardict-common (= ${source:Version})
-Recommends: stardict-plugin (= ${binary:Version}), stardict-plugin-espeak (= ${binary:Version}), stardict-plugin-festival (= ${binary:Version}), stardict-plugin-gucharmap (= ${binary:Version})
+Recommends:
+ stardict-plugin (= ${binary:Version}),
+ stardict-plugin-espeak (= ${binary:Version}),
+ stardict-plugin-festival (= ${binary:Version}),
+ stardict-plugin-gucharmap (= ${binary:Version})
 Suggests: ttf-freefont, ttf-arphic-uming
 Replaces: stardict-gtk, stardict (<< 3.0.1-1)
 Conflicts: stardict-gtk, stardict (<< 3.0.1-1)
@@ -51,7 +55,10 @@ Package: stardict-gtk
 Architecture: any
 Depends:
  ${misc:Depends}, ${shlibs:Depends}, stardict-common (= ${source:Version})
-Recommends: stardict-plugin (= ${binary:Version}), stardict-plugin-espeak (= ${binary:Version}), stardict-plugin-festival (= ${binary:Version})
+Recommends:
+ stardict-plugin (= ${binary:Version}),
+ stardict-plugin-espeak (= ${binary:Version}),
+ stardict-plugin-festival (= ${binary:Version})
 Suggests: ttf-freefont, ttf-arphic-uming
 Replaces: stardict-gnome, stardict (<< 3.0.1-1)
 Conflicts: stardict-gnome, stardict (<< 3.0.1-1)
@@ -144,7 +151,8 @@ Description: International dictionary - common plugins
 Package: stardict-common
 Architecture: all
 Depends: ${misc:Depends}, rarian-compat, sgml-data (>= 2.0.2)
-Recommends: stardict-gnome (>= ${source:Version}) | stardict-gtk (>= ${source:Version})
+Recommends:
+ stardict-gnome (>= ${source:Version}) | stardict-gtk (>= ${source:Version})
 Description: International dictionary - data files
  StarDict is a cross-platform and international written in GTK+ 2.x.
  It has powerful features such as "Glob-style pattern matching",
