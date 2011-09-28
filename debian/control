@@ -21,8 +21,6 @@ Architecture: all
 Depends:
  ${misc:Depends}, ${shlibs:Depends},
  stardict-gnome (>= ${source:Version}) | stardict-gtk (>= ${source:Version})
-Provides: stardic
-Replaces: stardic
 Description: International dictionary
  StarDict is a cross-platform and international dictionary written in
  GTK+ 2.x.  It has powerful features such as "Glob-style pattern
@@ -162,9 +160,3 @@ Description: International dictionary - data files
  .
  This package contains data files (pixmaps, icons, documentations) needed
  by the stardict package.
-
-Package: stardic
-Architecture: all
-Depends: ${misc:Depends}, ${shlibs:Depends}, stardict
-Description: transiational dummy package which can be safely removed
- Dummy package to upgrade to the new stardict package.
