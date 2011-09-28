@@ -1,3 +1,21 @@
+stardict (3.0.1-9) unstable; urgency=low
+
+  * Drop ttf-thryomanes from Suggests: package ttf-thryomanes has been
+    removed since lenny. (Closes: #619721)
+  * Sorting Depends.
+  * Warpping Depends.
+  * Sorting Recommends.
+  * Warpping Recommends.
+  * Drop stardict (<< 3.0.1-1) from Replaces and Conflicts: 3.0.1-7 already
+    shipping in squeeze.
+  * Added Conflicts and replaces in stardict-common: avoid overwrite errors
+    when upgrading from previous revision.
+  * Put desktop menu entry in stardict-common package. (Closes: #642495)
+  * Drop dummy package stardic: transition has done in squeeze.
+  * Correct desktop-command-not-in-package entry in lintian-overrides file.
+
+ -- Andrew Lee (李健秋) <ajqlee@debian.org>  Wed, 28 Sep 2011 15:21:19 +0800
+
 stardict (3.0.1-8) unstable; urgency=low
 
   * Applied 08_gcc-4.6.patch from BTS.
