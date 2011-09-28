@@ -1,6 +1,7 @@
 debian/stardict_16x16.xpm usr/share/pixmaps
 debian/stardict_32x32.xpm usr/share/pixmaps
 debian/stardict-common.lintian-overrides usr/share/lintian/overrides
+debian/tmp/usr/share/applications/*
 debian/tmp/usr/share/locale/*
 debian/tmp/usr/share/omf/*
 debian/tmp/usr/share/pixmaps/*
