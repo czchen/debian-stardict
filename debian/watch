@@ -1,6 +1,4 @@
-# Example watch control file for uscan
-# Rename this file to "watch" and then you can run the "uscan" command
-# to check for upstream updates and more.
-# Site		Directory		Pattern			Version	Script
 version=3
-http://sf.net/stardict/stardict-([\d.]*)\.tar\.bz2
+
+opts=downloadurlmangle=s#.*(stardict-([\d.]+)\.tar\.bz2).*#http://stardict.googlecode.com/files/$1#,filenamemangle=s#.*(stardict-([\d.]+)\.tar\.bz2).*#$1# \
+    http://code.google.com/p/stardict-3/downloads/list ^.*detail\?name=stardict-([\d.]+)\.tar\.bz2.*
