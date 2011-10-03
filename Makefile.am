@@ -1,22 +1,12 @@
-## Process this file with automake to produce Makefile.in
+if BUILD_DICT
+  DICT_SUBDIR = dict
+endif
 
-SUBDIRS = m4 src stardict-plugins tests pixmaps po help data doc debian mvsc
-ACLOCAL_AMFLAGS = -I m4
+if BUILD_TOOLS
+  TOOLS_SUBDIR = tools
+endif
+
+SUBDIRS = lib $(DICT_SUBDIR) $(TOOLS_SUBDIR)
 
 EXTRA_DIST = \
-	ChangeLog  		\
-	README 			\
-	INSTALL			\
-	TODO 			\
-	NEWS			\
-	autogen.sh		\
-	stardict.spec.in stardict-withoutgnome.spec.in \
-	dictionary.spec	\
-	treedict.spec	\
-	stardict.dev stardict.ico stardict-uninst.ico stardict-installer.nsi \
-	omf.make		\
-	xmldocs.make 		\
-	intltool-extract.in 	\
-	intltool-merge.in 	\
-	intltool-update.in	\
-	stardictrc.rc
+	autogen.sh
