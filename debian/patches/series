@@ -1,5 +1,4 @@
 02_makefile.patch
-04_changelog-minor-typo-fixes.patch
 05_g++-4.4.patch
 06_new_gucharmap.patch
 07_disable_netdict.patch
