@@ -1,5 +1,4 @@
 02_makefile.patch
-06_new_gucharmap.patch
 07_disable_netdict.patch
 08_gcc-4.6.patch
 09_fix_ftbfs_binutils_gold.patch
