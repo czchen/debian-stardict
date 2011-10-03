@@ -1,19 +1,8 @@
 Author: Andrew Lee <andrew@linux.org.tw>
-Description: Patch from RedHat's bugzilla provided by Tomas Hoger
---- a/src/conf.cpp
-+++ b/src/conf.cpp
-@@ -51,7 +51,7 @@
- #else
- 	add_entry("/apps/stardict/preferences/dictionary/use_custom_font", false);
- #endif
--	add_entry("/apps/stardict/preferences/network/enable_netdict", true);
-+	add_entry("/apps/stardict/preferences/network/enable_netdict", false);
- 	// Default stardictd server.
- 	add_entry("/apps/stardict/preferences/network/server", std::string(_("dict.stardict.org")));
- 	add_entry("/apps/stardict/preferences/network/port", 2628);
---- a/src/prefsdlg.cpp
-+++ b/src/prefsdlg.cpp
-@@ -1038,6 +1038,10 @@
+Description: Patch from RedHat's bugzilla provided by Tomas Hoger.(CVE-2009-2260)
+--- a/dict/src/prefsdlg.cpp
++++ b/dict/src/prefsdlg.cpp
+@@ -1158,6 +1158,10 @@
      GtkWidget *hbox1 = gtk_hbox_new(FALSE, 6);
      gtk_box_pack_start(GTK_BOX(hbox1),button,false,false,0);
      gtk_box_pack_start(GTK_BOX(vbox1),hbox1,false,false,0);
@@ -23,4 +12,4 @@ Description: Patch from RedHat's bugzilla provided by Tomas Hoger
 +    gtk_box_pack_start(GTK_BOX(vbox1),label,false,false,0);
  }
  
- void PrefsDlg::on_setup_mainwin_searchWhileTyping_ckbutton_toggled(GtkToggleButton *button, PrefsDlg *oPrefsDlg)
+ #if defined(_WIN32) || defined(CONFIG_GNOME)
