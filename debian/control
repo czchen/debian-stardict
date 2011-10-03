@@ -6,9 +6,11 @@ Uploaders: Anthony Fok <foka@debian.org>
 Build-Depends:
  debhelper (>= 8), autoconf, automake (>= 1.10), autotools-dev, intltool,
  libbonobo2-dev, libenchant-dev, libespeak-dev, libestools2.0-dev,
- libgconf2-dev, libgnomeui-dev, libgucharmap2-dev, liborbit2-dev,
- libsigc++-2.0-dev (>= 2.0.18-2), libtool, libx11-dev, libxml-parser-perl,
- festival-dev, rarian-compat, sharutils, x11proto-core-dev, zlib1g-dev
+ libgconf2-dev, libgnomeui-dev, libgucharmap2-dev, libmysqlclient-dev,
+ liborbit2-dev, libpcre3-dev, libsigc++-2.0-dev (>= 2.0.18-2),
+ libtool, libx11-dev,
+ libxml-parser-perl, festival-dev, rarian-compat, sharutils,
+ x11proto-core-dev, zlib1g-dev
 Build-Conflicts: autoconf2.13, automake1.4
 Standards-Version: 3.9.2
 Homepage: http://stardict.sourceforge.net/
@@ -160,3 +162,16 @@ Description: International dictionary - data files
  .
  This package contains data files (pixmaps, icons, documentations) needed
  by the stardict package.
+
+Package: stardict-tools
+Architecture: any
+Depends: ${misc:Depends}, ${python:Depends}, ${shlibs:Depends}, dictzip
+Suggests: babiloo | goldendict | qstardict | stardict | stardict-gtk
+Description: dictionary conversion tools of stardict
+ StarDict is a cross-platform and international dictionary written in
+ GTK+ 2.x with GNOME 2 support. It has powerful features such as
+ "Glob-style pattern matching", "Scan selection word", "Fuzzy query",
+ etc.
+ .
+ This package contains the dictionary conversion tools which can convert
+ dictionaries of DICT, wquick, mova and pydict to stardict format.
