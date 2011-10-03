@@ -23,10 +23,18 @@ Architecture: all
 Depends:
  ${misc:Depends}, ${shlibs:Depends},
  stardict-gnome (>= ${source:Version}) | stardict-gtk (>= ${source:Version})
-Description: International dictionary
- StarDict is a cross-platform and international dictionary written in
- GTK+ 2.x.  It has powerful features such as "Glob-style pattern
- matching", "Scan selection word", "Fuzzy search", etc.
+Description: International dictionary lookup program.
+ StarDict is a cross-platform international dictionary lookup program.
+ .
+ Main features:
+  * Glob-style pattern matching search
+  * Fuzzy search
+  * Working from system tray
+  * Scanning mouse selection and showing pop-up windows with translation of
+    selected words
+  * Pronouncing of the translated words
+  * Plugins support
+  * ..and more
 
 Package: stardict-gnome
 Architecture: any
@@ -41,12 +49,20 @@ Suggests: ttf-freefont, ttf-arphic-uming
 Replaces: stardict-gtk
 Conflicts: stardict-gtk
 Provides: stardict
-Description: International dictionary for GNOME 2
- StarDict is a cross-platform and international dictionary written in
- GTK+ 2.x.  It has powerful features such as "Glob-style pattern
- matching", "Scan selection word", "Fuzzy search", etc.
+Description: International dictionary lookup program - GNOME Support
+ StarDict is a cross-platform international dictionary lookup program.
  .
- This package is compiled with GNOME 2 support and contains only the
+ Main features:
+  * Glob-style pattern matching search
+  * Fuzzy search
+  * Working from system tray
+  * Scanning mouse selection and showing pop-up windows with translation of
+    selected words
+  * Pronouncing of the translated words
+  * Plugins support
+  * ..and more
+ .
+ This package is compiled with GNOME support and contains only the
  program of stardict and will be of limited use without the dictionary
  files. For more information about how to get the dictionary files,
  please read /usr/share/doc/stardict/README.Debian.
@@ -63,12 +79,20 @@ Suggests: ttf-freefont, ttf-arphic-uming
 Replaces: stardict-gnome
 Conflicts: stardict-gnome
 Provides: stardict
-Description: International dictionary written in GTK+ 2.x
- StarDict is a cross-platform and international dictionary written in
- GTK+ 2.x.  It has powerful features such as "Glob-style pattern
- matching", "Scan selection word", "Fuzzy search", etc.
+Description: International dictionary lookup program
+ StarDict is a cross-platform international dictionary lookup program.
  .
- This package is compiled without GNOME 2 support and contains only
+ Main features:
+  * Glob-style pattern matching search
+  * Fuzzy search
+  * Working from system tray
+  * Scanning mouse selection and showing pop-up windows with translation of
+    selected words
+  * Pronouncing of the translated words
+  * Plugins support
+  * ..and more
+ .
+ This package is compiled without GNOME support and contains only
  the program of stardict and will be of limited use without the
  dictionary files. For more information about how to get the
  dictionary files, please read /usr/share/doc/stardict/README.Debian.
@@ -79,13 +103,21 @@ Depends:
  ${misc:Depends}, ${shlibs:Depends}, stardict-common (= ${source:Version}),
  stardict-gnome (= ${binary:Version}) | stardict-gtk (= ${binary:Version}),
  stardict-plugin (= ${binary:Version})
-Description: International dictionary - eSpeak TTS plugin
- StarDict is a cross-platform and international written in GTK+ 2.x.
- It has powerful features such as "Glob-style pattern matching",
- "Scan selection word", "Fuzzy search", etc.
+Description: International dictionary lookup program - eSpeak TTS plugin
+ StarDict is a cross-platform international dictionary lookup program.
  .
- This package contains eSpeak TTS plugin for StarDict which can
- pronounce words.
+ Main features:
+  * Glob-style pattern matching search
+  * Fuzzy search
+  * Working from system tray
+  * Scanning mouse selection and showing pop-up windows with translation of
+    selected words
+  * Pronouncing of the translated words
+  * Plugins support
+  * ..and more
+ .
+ This package contains eSpeak TTS plugin for StarDict which can pronounce
+ words.
 
 Package: stardict-plugin-festival
 Architecture: any
@@ -93,13 +125,21 @@ Depends:
  ${misc:Depends}, ${shlibs:Depends}, stardict-common (= ${source:Version}),
  stardict-gnome (= ${binary:Version}) | stardict-gtk (= ${binary:Version}),
  stardict-plugin (= ${binary:Version})
-Description: International dictionary - Festival TTS plugin
- StarDict is a cross-platform and international written in GTK+ 2.x.
- It has powerful features such as "Glob-style pattern matching",
- "Scan selection word", "Fuzzy search", etc.
+Description: International dictionary lookup program - Festival TTS plugin
+ StarDict is a cross-platform international dictionary lookup program.
  .
- This package contains Festival TTS plugin for StarDict which can
- pronounce words.
+ Main features:
+  * Glob-style pattern matching search
+  * Fuzzy search
+  * Working from system tray
+  * Scanning mouse selection and showing pop-up windows with translation of
+    selected words
+  * Pronouncing of the translated words
+  * Plugins support
+  * ..and more
+ .
+ This package contains Festival TTS plugin for StarDict which can pronounce
+ words.
 
 Package: stardict-plugin-gucharmap
 Architecture: any
@@ -107,13 +147,21 @@ Depends:
  ${misc:Depends}, ${shlibs:Depends}, stardict-common (= ${source:Version}),
  stardict-gnome (= ${binary:Version}) | stardict-gtk (= ${binary:Version}),
  stardict-plugin (= ${binary:Version})
-Description: International dictionary - gucharmap plugin
- StarDict is a cross-platform and international written in GTK+ 2.x.
- It has powerful features such as "Glob-style pattern matching",
- "Scan selection word", "Fuzzy search", etc.
+Description: International dictionary lookup program - gucharmap plugin
+ StarDict is a cross-platform international dictionary lookup program.
  .
- This package contains gucharmap plugin for StarDict which can help
- you examine Unicode character's detailed properties.
+ Main features:
+  * Glob-style pattern matching search
+  * Fuzzy search
+  * Working from system tray
+  * Scanning mouse selection and showing pop-up windows with translation of
+    selected words
+  * Pronouncing of the translated words
+  * Plugins support
+  * ..and more
+ .
+ This package contains gucharmap plugin for StarDict which can help you
+ examine Unicode character's detailed properties.
 
 Package: stardict-plugin-spell
 Architecture: any
@@ -121,25 +169,41 @@ Depends:
  ${misc:Depends}, ${shlibs:Depends}, stardict-common (= ${source:Version}),
  stardict-gnome (= ${binary:Version}) | stardict-gtk (= ${binary:Version}),
  stardict-plugin (= ${binary:Version})
-Description: International dictionary - spell plugin
- StarDict is a cross-platform and international written in GTK+ 2.x.
- It has powerful features such as "Glob-style pattern matching",
- "Scan selection word", "Fuzzy search", etc.
+Description: International dictionary lookup program - spell plugin
+ StarDict is a cross-platform international dictionary lookup program.
  .
- This package contains spell plugin for StarDict which give you
- spelling suggestion while you searching the dictionary.
+ Main features:
+  * Glob-style pattern matching search
+  * Fuzzy search
+  * Working from system tray
+  * Scanning mouse selection and showing pop-up windows with translation of
+    selected words
+  * Pronouncing of the translated words
+  * Plugins support
+  * ..and more
+ .
+ This package contains spell plugin for StarDict which give you spelling
+ suggestion while you searching the dictionary.
 
 Package: stardict-plugin
 Architecture: any
 Depends:
  ${misc:Depends}, ${shlibs:Depends}, stardict-common (= ${source:Version}),
  stardict-gnome (= ${binary:Version}) | stardict-gtk (= ${binary:Version})
-Description: International dictionary - common plugins
- StarDict is a cross-platform and international written in GTK+ 2.x.
- It has powerful features such as "Glob-style pattern matching",
- "Scan selection word", "Fuzzy search", etc.
+Description: International dictionary lookup program - common plugins
+ StarDict is a cross-platform international dictionary lookup program.
  .
- This package contains some add-on plugins for StarDict. These include:
+ Main features:
+  * Glob-style pattern matching search
+  * Fuzzy search
+  * Working from system tray
+  * Scanning mouse selection and showing pop-up windows with translation of
+    selected words
+  * Pronouncing of the translated words
+  * Plugins support
+  * ..and more
+ .
+ This package contains some add-on plugins for StarDict. Includes:
   - man virtual dict plugin
   - qqwry virtual dict plugin
   - html parse plugin
@@ -155,23 +219,38 @@ Recommends:
  stardict-gnome (>= ${source:Version}) | stardict-gtk (>= ${source:Version})
 Conflicts: stardict-gnome (= 3.0.1-8), stardict-gtk (= 3.0.1-8)
 Replaces: stardict-gnome (= 3.0.1-8), stardict-gtk (= 3.0.1-8)
-Description: International dictionary - data files
- StarDict is a cross-platform and international written in GTK+ 2.x.
- It has powerful features such as "Glob-style pattern matching",
- "Scan selection word", "Fuzzy search", etc.
+Description: International dictionary lookup program - data files
+ StarDict is a cross-platform international dictionary lookup program.
+ .
+ Main features:
+  * Glob-style pattern matching search
+  * Fuzzy search
+  * Working from system tray
+  * Scanning mouse selection and showing pop-up windows with translation of
+    selected words
+  * Pronouncing of the translated words
+  * Plugins support
+  * ..and more
  .
  This package contains data files (pixmaps, icons, documentations) needed
- by the stardict package.
+ by the stardict.
 
 Package: stardict-tools
 Architecture: any
 Depends: ${misc:Depends}, ${python:Depends}, ${shlibs:Depends}, dictzip
 Suggests: babiloo | goldendict | qstardict | stardict | stardict-gtk
 Description: dictionary conversion tools of stardict
- StarDict is a cross-platform and international dictionary written in
- GTK+ 2.x with GNOME 2 support. It has powerful features such as
- "Glob-style pattern matching", "Scan selection word", "Fuzzy query",
- etc.
+ StarDict is a cross-platform international dictionary lookup program.
+ .
+ Main features:
+  * Glob-style pattern matching search
+  * Fuzzy search
+  * Working from system tray
+  * Scanning mouse selection and showing pop-up windows with translation of
+    selected words
+  * Pronouncing of the translated words
+  * Plugins support
+  * ..and more
  .
  This package contains the dictionary conversion tools which can convert
  dictionaries of DICT, wquick, mova and pydict to stardict format.
