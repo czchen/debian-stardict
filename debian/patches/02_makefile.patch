@@ -1,31 +1,44 @@
-Author: Andrew Lee <andrew@linux.org.tw> <andrew@linux.org.tw>
-Description: We don't need to run make in debian/ and mvsc/ subdirectory. 
-No description.
---- a/Makefile.am
-+++ b/Makefile.am
-@@ -1,6 +1,6 @@
+--- a/dict/Makefile.am
++++ b/dict/Makefile.am
+@@ -1,7 +1,6 @@
  ## Process this file with automake to produce Makefile.in
  
--SUBDIRS = m4 src stardict-plugins tests pixmaps po help data doc debian mvsc
+-SUBDIRS = m4 src stardict-plugins tests pixmaps po help data doc \
+-	debian-upstream mac_dist msvc_2008
 +SUBDIRS = m4 src stardict-plugins tests pixmaps po help data doc
  ACLOCAL_AMFLAGS = -I m4
  
  EXTRA_DIST = \
---- a/configure.in
-+++ b/configure.in
-@@ -442,8 +442,6 @@
- stardict-withoutgnome.spec
- data/Makefile
- doc/Makefile
--debian/Makefile
--mvsc/Makefile
- po/Makefile.in
- m4/Makefile
- src/Makefile
---- a/autogen.sh
-+++ b/autogen.sh
-@@ -47,4 +47,3 @@
- autoconf || exit;
- echo "Running automake ...."
- automake || exit;
--./configure --prefix=/usr --sysconfdir=/etc --mandir=/usr/share/man --disable-deprecations $@
+--- a/dict/Makefile.in
++++ b/dict/Makefile.in
+@@ -295,8 +295,7 @@
+ top_build_prefix = @top_build_prefix@
+ top_builddir = @top_builddir@
+ top_srcdir = @top_srcdir@
+-SUBDIRS = m4 src stardict-plugins tests pixmaps po help data doc \
+-	debian-upstream mac_dist msvc_2008
++SUBDIRS = m4 src stardict-plugins tests pixmaps po help data doc
+ 
+ ACLOCAL_AMFLAGS = -I m4
+ EXTRA_DIST = \
+--- a/dict/configure
++++ b/dict/configure
+@@ -19271,7 +19271,7 @@
+ 
+ 
+ 
+-ac_config_files="$ac_config_files Makefile stardict.spec stardict-withoutgnome.spec data/Makefile doc/Makefile debian-upstream/Makefile mac_dist/Makefile msvc_2008/Makefile po/Makefile.in m4/Makefile src/Makefile src/sigc++/Makefile src/sigc++config/Makefile src/lib/Makefile src/pixmaps/Makefile src/sounds/Makefile src/dic/Makefile src/dic/stardict-dict/Makefile src/dic/stardict-dict/res/Makefile src/skins/Makefile src/treedict/Makefile src/win32/Makefile src/win32/acrobat/Makefile src/win32/acrobat/sources/Makefile src/win32/acrobat/win32/Makefile src/win32/nsis/Makefile src/win32/PortableApps.com/Makefile stardict-plugins/Makefile stardict-plugins/stardict-man-plugin/Makefile stardict-plugins/stardict-qqwry-plugin/Makefile stardict-plugins/stardict-dictdotcn-plugin/Makefile stardict-plugins/stardict-update-info-plugin/Makefile stardict-plugins/stardict-spell-plugin/Makefile stardict-plugins/stardict-gucharmap-plugin/Makefile stardict-plugins/stardict-festival-tts-plugin/Makefile stardict-plugins/stardict-espeak-tts-plugin/Makefile stardict-plugins/stardict-wiki-parsedata-plugin/Makefile stardict-plugins/stardict-powerword-parsedata-plugin/Makefile stardict-plugins/stardict-xdxf-parsedata-plugin/Makefile stardict-plugins/stardict-wordnet-plugin/Makefile stardict-plugins/stardict-html-parsedata-plugin/Makefile stardict-plugins/stardict-sapi-tts-plugin/Makefile tests/Makefile pixmaps/Makefile help/Makefile"
++ac_config_files="$ac_config_files Makefile stardict.spec stardict-withoutgnome.spec data/Makefile doc/Makefile po/Makefile.in m4/Makefile src/Makefile src/sigc++/Makefile src/sigc++config/Makefile src/lib/Makefile src/pixmaps/Makefile src/sounds/Makefile src/dic/Makefile src/dic/stardict-dict/Makefile src/dic/stardict-dict/res/Makefile src/skins/Makefile src/treedict/Makefile src/win32/Makefile src/win32/acrobat/Makefile src/win32/acrobat/sources/Makefile src/win32/acrobat/win32/Makefile src/win32/nsis/Makefile src/win32/PortableApps.com/Makefile stardict-plugins/Makefile stardict-plugins/stardict-man-plugin/Makefile stardict-plugins/stardict-qqwry-plugin/Makefile stardict-plugins/stardict-dictdotcn-plugin/Makefile stardict-plugins/stardict-update-info-plugin/Makefile stardict-plugins/stardict-spell-plugin/Makefile stardict-plugins/stardict-gucharmap-plugin/Makefile stardict-plugins/stardict-festival-tts-plugin/Makefile stardict-plugins/stardict-espeak-tts-plugin/Makefile stardict-plugins/stardict-wiki-parsedata-plugin/Makefile stardict-plugins/stardict-powerword-parsedata-plugin/Makefile stardict-plugins/stardict-xdxf-parsedata-plugin/Makefile stardict-plugins/stardict-wordnet-plugin/Makefile stardict-plugins/stardict-html-parsedata-plugin/Makefile stardict-plugins/stardict-sapi-tts-plugin/Makefile tests/Makefile pixmaps/Makefile help/Makefile"
+ 
+ cat >confcache <<\_ACEOF
+ # This file is a shell script that caches the results of configure
+@@ -20415,9 +20415,6 @@
+     "stardict-withoutgnome.spec") CONFIG_FILES="$CONFIG_FILES stardict-withoutgnome.spec" ;;
+     "data/Makefile") CONFIG_FILES="$CONFIG_FILES data/Makefile" ;;
+     "doc/Makefile") CONFIG_FILES="$CONFIG_FILES doc/Makefile" ;;
+-    "debian-upstream/Makefile") CONFIG_FILES="$CONFIG_FILES debian-upstream/Makefile" ;;
+-    "mac_dist/Makefile") CONFIG_FILES="$CONFIG_FILES mac_dist/Makefile" ;;
+-    "msvc_2008/Makefile") CONFIG_FILES="$CONFIG_FILES msvc_2008/Makefile" ;;
+     "po/Makefile.in") CONFIG_FILES="$CONFIG_FILES po/Makefile.in" ;;
+     "m4/Makefile") CONFIG_FILES="$CONFIG_FILES m4/Makefile" ;;
+     "src/Makefile") CONFIG_FILES="$CONFIG_FILES src/Makefile" ;;
