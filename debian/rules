@@ -5,7 +5,6 @@
 	dh $@
 
 override_dh_auto_configure:
-	./autogen.sh
 	# Add here commands to compile the package without gnome support.
 	dh_auto_configure -- \
 		--disable-schemas-install \
