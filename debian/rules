@@ -13,10 +13,10 @@ override_dh_auto_configure:
 		--disable-advertisement \
 		--disable-updateinfo
 
-	sed -e 's/SUBDIRS = m4 src stardict-plugins/SUBDIRS = m4 src/' Makefile > Makefile-noplugins
-	$(MAKE) -f Makefile-noplugins
+	sed -e 's/SUBDIRS = m4 src stardict-plugins/SUBDIRS = m4 src/' dict/Makefile > dict/Makefile-noplugins
+	$(MAKE) -f dict/Makefile-noplugins
 	# Make a copy for stardict without gnome support.
-	cp src/stardict stardict
+	cp dict/src/stardict stardict
 	make distclean
 
 	# Add here commands to compile the package with gnome support
@@ -28,7 +28,7 @@ override_dh_auto_configure:
 
 override_dh_auto_clean:
 	# Clean up
-	rm -f stardict-gtk
+	rm -f stardict
 
 override_dh_auto_test:
 	# Disable check failed in tests/.
