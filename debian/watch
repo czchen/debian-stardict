@@ -1,4 +1,2 @@
 version=3
-
-opts=downloadurlmangle=s#.*(stardict-([\d.]+)\.tar\.bz2).*#http://stardict.googlecode.com/files/$1#,filenamemangle=s#.*(stardict-([\d.]+)\.tar\.bz2).*#$1# \
-    http://code.google.com/p/stardict-3/downloads/list ^.*detail\?name=stardict-([\d.]+)\.tar\.bz2.*
+http://googlecode.debian.net/p/stardict-3/stardict-([\d\.]*).tar.bz2
