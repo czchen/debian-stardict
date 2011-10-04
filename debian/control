@@ -5,6 +5,7 @@ Maintainer: Andrew Lee (李健秋) <ajqlee@debian.org>
 Uploaders: Anthony Fok <foka@debian.org>
 Build-Depends:
  debhelper (>= 8), autoconf, automake (>= 1.10), autotools-dev, intltool,
+ gnome-doc-utils.
  libbonobo2-dev, libenchant-dev, libespeak-dev, libestools2.0-dev,
  libgconf2-dev, libgnomeui-dev, libgucharmap2-dev, libmysqlclient-dev,
  liborbit2-dev, libpcre3-dev, libsigc++-2.0-dev (>= 2.0.18-2),
