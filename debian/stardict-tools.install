@@ -18,7 +18,6 @@ tools/src/21tech usr/lib/stardict-tools/
 tools/src/21shiji usr/lib/stardict-tools/
 tools/src/buddhist usr/lib/stardict-tools/
 tools/src/tabfile usr/lib/stardict-tools/
-tools/src/dsl2dict usr/lib/stardict-tools/
 tools/src/cedict usr/lib/stardict-tools/
 tools/src/edict usr/lib/stardict-tools/
 tools/src/duden usr/lib/stardict-tools/
@@ -37,7 +36,6 @@ tools/src/stardict-verify usr/lib/stardict-tools/
 tools/src/fest2dict usr/lib/stardict-tools/
 tools/src/i2e2dict usr/lib/stardict-tools/
 tools/src/downloadwiki usr/lib/stardict-tools/
-tools/src/testutf8 usr/lib/stardict-tools/
 tools/src/ooo2dict usr/lib/stardict-tools/
 tools/src/myspell2dic usr/lib/stardict-tools/
 tools/src/exc2i2e usr/lib/stardict-tools/
@@ -47,7 +45,6 @@ tools/src/KangXi usr/lib/stardict-tools/
 tools/src/Unihan usr/lib/stardict-tools/
 tools/src/xiaoxuetang-ja usr/lib/stardict-tools/
 tools/src/wubi usr/lib/stardict-tools/
-tools/src/bgl2txt usr/lib/stardict-tools/
 tools/src/ydp2dict usr/lib/stardict-tools/
 tools/src/wordnet usr/lib/stardict-tools/
 tools/src/lingvosound2resdb usr/lib/stardict-tools/
@@ -56,3 +53,4 @@ tools/src/dir2resdatabase usr/lib/stardict-tools/
 tools/src/stardict-index usr/lib/stardict-tools/
 tools/src/stardict-text2bin usr/lib/stardict-tools/
 tools/src/stardict-bin2text usr/lib/stardict-tools/
+tools/src/stardict-repair usr/lib/stardict-tools/
