@@ -1,9 +1,8 @@
-README
-TODO
+dict/README
+dict/TODO
 debian/README.Debian
-debian/TODO.Debian
-doc/StarDictFileFormat
-doc/FAQ
-doc/HACKING
-doc/HowToCreateDictionary
-doc/Translation
+dict/doc/StarDictFileFormat
+dict/doc/FAQ
+dict/doc/Skins
+dict/doc/HowToCreateDictionary
+dict/doc/Translation
