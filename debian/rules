@@ -11,11 +11,22 @@ override_dh_auto_configure:
 		--disable-gnome-support \
 		--disable-gucharmap \
 		--disable-advertisement \
-		--disable-updateinfo
+		--disable-updateinfo \
+		--disable-spell \
+		--disable-gucharmap \
+		--disable-festival \
+		--disable-espeak \
+		--disable-dictdotcn \
+		--disable-man \
+		--disable-qqwry \
+		--disable-htmlparse \
+		--disable-xdxfparse \
+		--disable-wordnet \
+		--disable-powerwordparse \
+		--disable-wikiparse
 
-	sed -e 's/SUBDIRS = m4 src stardict-plugins/SUBDIRS = m4 src/' dict/Makefile > dict/Makefile-noplugins
-	$(MAKE) -f dict/Makefile-noplugins
 	# Make a copy for stardict without gnome support.
+	$(MAKE)
 	cp dict/src/stardict stardict
 	make distclean
 

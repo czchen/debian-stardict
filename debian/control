@@ -5,7 +5,7 @@ Maintainer: Andrew Lee (李健秋) <ajqlee@debian.org>
 Uploaders: Anthony Fok <foka@debian.org>
 Build-Depends:
  debhelper (>= 8), autoconf, automake (>= 1.10), autotools-dev, intltool,
- gnome-doc-utils.
+ gnome-doc-utils,
  libbonobo2-dev, libenchant-dev, libespeak-dev, libestools2.0-dev,
  libgconf2-dev, libgnomeui-dev, libgucharmap2-dev, libmysqlclient-dev,
  liborbit2-dev, libpcre3-dev, libsigc++-2.0-dev (>= 2.0.18-2),
@@ -14,7 +14,7 @@ Build-Depends:
  x11proto-core-dev, zlib1g-dev
 Build-Conflicts: autoconf2.13, automake1.4
 Standards-Version: 3.9.2
-Homepage: http://stardict.sourceforge.net/
+Homepage: http://www.stardict.org
 Vcs-Git: git://git.debian.org/git/collab-maint/stardict.git
 Vcs-Browser: http://git.debian.org/?p=collab-maint/stardict.git;a=summary
 
