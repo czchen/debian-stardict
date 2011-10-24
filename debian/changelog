@@ -1,3 +1,41 @@
+stardict (3.0.3-1) unstable; urgency=low
+
+  * Updating debian/watch file: upstream moved from sourceforge to googlecode.
+  * Using GoogleCode Redirector from http://googlecode.debian.net for
+    debian/watch file.
+  * Imported Upstream version 3.0.3
+  * Stop to invoke autogen.sh during build time.
+  * Append prefix dist/ in rules file.
+  * Removed 01_festival-tts-plugin.patch: included in upstream.
+  * Refresh 02_makefile.patch.
+  * Drop 03_license-updates.patch: included in upstream.
+  * Drop 04_changelog-minor-typo-fixes.patch: included in upstream.
+  * Drop 05_g++-4.4.patch: included in upstream.
+  * Drop 06_new_gucharmap.patch: included in upstream.
+  * Refresh 07_disable_netdict.patch.
+  * Refresh 08_gcc-4.6.patch.
+  * Refresh 09_fix_ftbfs_binutils_gold.patch.
+  * Copying and merging package description and build-depends from
+    stardict-tools package.
+  * Refine package descriptions.
+  * Copying and merging stardict-tools.install file from stardict-tools
+    package.
+  * Build-depends on gnome-doc-utils.
+  * Update stardict-tools.install:
+    - Drop dsl2dict, testutf8, bgl2txt: removed from upstream.
+    - Add stardict-repair tool - repair broken dictionaries
+  * Update upstream url.
+  * Update stardict-common.docs.
+  * Removed useless debian/TODO.Debian.
+  * Added debian/stardict-tools.docs.
+  * Copying and merging stardict-tools.examples file from
+    stardict-tools package.
+  * Copying and merging stardict-tools.manpages file from
+    stardict-tools package.
+  * Update path of dict manpages.
+
+ -- Andrew Lee (李健秋) <ajqlee@debian.org>  Tue, 25 Oct 2011 04:39:38 +0800
+
 stardict (3.0.1-9) unstable; urgency=low
 
   * Drop ttf-thryomanes from Suggests: package ttf-thryomanes has been
