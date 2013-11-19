@@ -1,0 +1,5 @@
+debian/tmp/usr/bin/stardict
+debian/tmp/usr/lib/bonobo/servers/GNOME_Stardict.server
+debian/tmp/usr/share/gnome/*
+debian/tmp/etc/gconf/schemas/*
+debian/tmp/usr/share/idl/*

@@ -1,0 +1,13 @@
+Description: fix FTBFS with gcc 4.6 by adding a necessary header.
+Author: Ilya Barygin <barygin@gmail.com>
+Bug-Ubuntu: https://bugs.launchpad.net/bugs/832822
+--- stardict-3.0.1.orig/stardict-plugins/stardict-wordnet-plugin/scene.hpp
++++ stardict-3.0.1/stardict-plugins/stardict-wordnet-plugin/scene.hpp
+@@ -10,6 +10,7 @@
+ #include "spring.hpp"
+ 
+ #include <vector>
++#include <cstring>
+ using namespace std;
+ 
+ class scene_t {

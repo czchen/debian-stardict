@@ -1,0 +1,147 @@
+Source: stardict
+Section: utils
+Priority: optional
+Maintainer: Andrew Lee (李健秋) <ajqlee@debian.org>
+Uploaders: Anthony Fok <foka@debian.org>
+Build-Depends:
+ debhelper (>= 8), autoconf, automake (>= 1.10), autotools-dev, intltool,
+ libbonobo2-dev, libenchant-dev, libespeak-dev, libestools2.0-dev,
+ libgconf2-dev, libgnomeui-dev, liborbit2-dev,
+ libsigc++-2.0-dev (>= 2.0.18-2), libtool, libx11-dev, libxml-parser-perl,
+ festival-dev, rarian-compat, sharutils, x11proto-core-dev, zlib1g-dev
+Build-Conflicts: autoconf2.13, automake1.4
+Standards-Version: 3.9.2
+Homepage: http://stardict.sourceforge.net/
+Vcs-Git: git://git.debian.org/git/collab-maint/stardict.git
+Vcs-Browser: http://git.debian.org/?p=collab-maint/stardict.git;a=summary
+
+
+Package: stardict
+Architecture: all
+Depends:
+ ${misc:Depends}, ${shlibs:Depends},
+ stardict-gnome (>= ${source:Version}) | stardict-gtk (>= ${source:Version})
+Description: International dictionary
+ StarDict is a cross-platform and international dictionary written in
+ GTK+ 2.x.  It has powerful features such as "Glob-style pattern
+ matching", "Scan selection word", "Fuzzy search", etc.
+
+Package: stardict-gnome
+Architecture: any
+Depends:
+ ${misc:Depends}, ${shlibs:Depends}, stardict-common (= ${source:Version})
+Recommends:
+ stardict-plugin (= ${binary:Version}),
+ stardict-plugin-espeak (= ${binary:Version}),
+ stardict-plugin-festival (= ${binary:Version})
+Suggests: ttf-freefont, ttf-arphic-uming
+Replaces: stardict-gtk
+Conflicts: stardict-gtk
+Provides: stardict
+Description: International dictionary for GNOME 2
+ StarDict is a cross-platform and international dictionary written in
+ GTK+ 2.x.  It has powerful features such as "Glob-style pattern
+ matching", "Scan selection word", "Fuzzy search", etc.
+ .
+ This package is compiled with GNOME 2 support and contains only the
+ program of stardict and will be of limited use without the dictionary
+ files. For more information about how to get the dictionary files,
+ please read /usr/share/doc/stardict/README.Debian.
+
+Package: stardict-gtk
+Architecture: any
+Depends:
+ ${misc:Depends}, ${shlibs:Depends}, stardict-common (= ${source:Version})
+Recommends:
+ stardict-plugin (= ${binary:Version}),
+ stardict-plugin-espeak (= ${binary:Version}),
+ stardict-plugin-festival (= ${binary:Version})
+Suggests: ttf-freefont, ttf-arphic-uming
+Replaces: stardict-gnome
+Conflicts: stardict-gnome
+Provides: stardict
+Description: International dictionary written in GTK+ 2.x
+ StarDict is a cross-platform and international dictionary written in
+ GTK+ 2.x.  It has powerful features such as "Glob-style pattern
+ matching", "Scan selection word", "Fuzzy search", etc.
+ .
+ This package is compiled without GNOME 2 support and contains only
+ the program of stardict and will be of limited use without the
+ dictionary files. For more information about how to get the
+ dictionary files, please read /usr/share/doc/stardict/README.Debian.
+
+Package: stardict-plugin-espeak
+Architecture: any
+Depends:
+ ${misc:Depends}, ${shlibs:Depends}, stardict-common (= ${source:Version}),
+ stardict-gnome (= ${binary:Version}) | stardict-gtk (= ${binary:Version}),
+ stardict-plugin (= ${binary:Version})
+Description: International dictionary - eSpeak TTS plugin
+ StarDict is a cross-platform and international written in GTK+ 2.x.
+ It has powerful features such as "Glob-style pattern matching",
+ "Scan selection word", "Fuzzy search", etc.
+ .
+ This package contains eSpeak TTS plugin for StarDict which can
+ pronounce words.
+
+Package: stardict-plugin-festival
+Architecture: any
+Depends:
+ ${misc:Depends}, ${shlibs:Depends}, stardict-common (= ${source:Version}),
+ stardict-gnome (= ${binary:Version}) | stardict-gtk (= ${binary:Version}),
+ stardict-plugin (= ${binary:Version})
+Description: International dictionary - Festival TTS plugin
+ StarDict is a cross-platform and international written in GTK+ 2.x.
+ It has powerful features such as "Glob-style pattern matching",
+ "Scan selection word", "Fuzzy search", etc.
+ .
+ This package contains Festival TTS plugin for StarDict which can
+ pronounce words.
+
+Package: stardict-plugin-spell
+Architecture: any
+Depends:
+ ${misc:Depends}, ${shlibs:Depends}, stardict-common (= ${source:Version}),
+ stardict-gnome (= ${binary:Version}) | stardict-gtk (= ${binary:Version}),
+ stardict-plugin (= ${binary:Version})
+Description: International dictionary - spell plugin
+ StarDict is a cross-platform and international written in GTK+ 2.x.
+ It has powerful features such as "Glob-style pattern matching",
+ "Scan selection word", "Fuzzy search", etc.
+ .
+ This package contains spell plugin for StarDict which give you
+ spelling suggestion while you searching the dictionary.
+
+Package: stardict-plugin
+Architecture: any
+Depends:
+ ${misc:Depends}, ${shlibs:Depends}, stardict-common (= ${source:Version}),
+ stardict-gnome (= ${binary:Version}) | stardict-gtk (= ${binary:Version})
+Description: International dictionary - common plugins
+ StarDict is a cross-platform and international written in GTK+ 2.x.
+ It has powerful features such as "Glob-style pattern matching",
+ "Scan selection word", "Fuzzy search", etc.
+ .
+ This package contains some add-on plugins for StarDict. These include:
+  - man virtual dict plugin
+  - qqwry virtual dict plugin
+  - html parse plugin
+  - xdxf parse plugin
+  - wordnet plugin
+  - powerword parse plugin
+  - wiki parse plugin
+
+Package: stardict-common
+Architecture: all
+Depends: ${misc:Depends}, rarian-compat, sgml-data (>= 2.0.2)
+Recommends:
+ stardict-gnome (>= ${source:Version}) | stardict-gtk (>= ${source:Version})
+Conflicts: stardict-gnome (= 3.0.1-8), stardict-gtk (= 3.0.1-8)
+Replaces: stardict-gnome (= 3.0.1-8), stardict-gtk (= 3.0.1-8)
+Description: International dictionary - data files
+ StarDict is a cross-platform and international written in GTK+ 2.x.
+ It has powerful features such as "Glob-style pattern matching",
+ "Scan selection word", "Fuzzy search", etc.
+ .
+ This package contains data files (pixmaps, icons, documentations) needed
+ by the stardict package.

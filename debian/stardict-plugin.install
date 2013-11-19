@@ -1,0 +1,9 @@
+debian/tmp/usr/lib/stardict/plugins/stardict_html_parsedata.so
+debian/tmp/usr/lib/stardict/plugins/stardict_xdxf_parsedata.so
+debian/tmp/usr/lib/stardict/plugins/stardict_wordnet.so
+debian/tmp/usr/lib/stardict/plugins/stardict_man.so
+debian/tmp/usr/lib/stardict/plugins/stardict_qqwry.so
+debian/tmp/usr/lib/stardict/plugins/stardict_powerword_parsedata.so
+debian/tmp/usr/lib/stardict/plugins/stardict_wordnet_parsedata.so
+debian/tmp/usr/lib/stardict/plugins/stardict_wiki_parsedata.so
+debian/tmp/usr/lib/stardict/plugins/stardict_dictdotcn.so

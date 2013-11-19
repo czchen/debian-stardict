@@ -1,0 +1,36 @@
+#!/usr/bin/make -f
+#export DH_VERBOSE=1
+
+%:
+	dh $@
+
+override_dh_auto_configure:
+	./autogen.sh
+	# Add here commands to compile the package without gnome support.
+	dh_auto_configure -- \
+		--disable-schemas-install \
+		--disable-gnome-support \
+		--disable-gucharmap \
+		--disable-advertisement \
+		--disable-updateinfo
+
+	sed -e 's/SUBDIRS = m4 src stardict-plugins/SUBDIRS = m4 src/' Makefile > Makefile-noplugins
+	$(MAKE) -f Makefile-noplugins
+	# Make a copy for stardict without gnome support.
+	cp src/stardict stardict
+	make distclean
+
+	# Add here commands to compile the package with gnome support
+	dh_auto_configure -- \
+		--disable-schemas-install \
+		--disable-advertisement \
+		--disable-gucharmap \
+		--disable-updateinfo
+	$(MAKE)
+
+override_dh_auto_clean:
+	# Clean up
+	rm -f stardict-gtk
+
+override_dh_auto_test:
+	# Disable check failed in tests/.

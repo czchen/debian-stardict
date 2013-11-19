@@ -1,0 +1,9 @@
+?package(stardict-common): \
+        needs="X11" \
+        section="Applications/Text" \
+        title="stardict" \
+        longtitle="dictionary lookup program" \
+        command="/usr/bin/stardict" \
+        icon="/usr/share/pixmaps/stardict_32x32.xpm" \
+        icon16x16="/usr/share/pixmaps/stardict_16x16.xpm" \
+        hints="Translation,Dictionary"
