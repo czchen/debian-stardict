@@ -3,7 +3,7 @@ Author: Ilya Barygin <barygin@gmail.com>
 Bug-Ubuntu: https://bugs.launchpad.net/bugs/832822
 --- a/dict/stardict-plugins/stardict-wordnet-plugin/scene.h
 +++ b/dict/stardict-plugins/stardict-wordnet-plugin/scene.h
-@@ -29,6 +29,7 @@
+@@ -31,6 +31,7 @@
  #include "spring.h"
  
  #include <vector>

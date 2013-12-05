@@ -11,7 +11,7 @@
  EXTRA_DIST = \
 --- a/dict/Makefile.in
 +++ b/dict/Makefile.in
-@@ -295,8 +295,7 @@
+@@ -330,8 +330,7 @@
  top_build_prefix = @top_build_prefix@
  top_builddir = @top_builddir@
  top_srcdir = @top_srcdir@
@@ -23,7 +23,7 @@
  EXTRA_DIST = \
 --- a/dict/configure
 +++ b/dict/configure
-@@ -19271,7 +19271,7 @@
+@@ -19978,7 +19978,7 @@
  
  
  
@@ -32,7 +32,7 @@
  
  cat >confcache <<\_ACEOF
  # This file is a shell script that caches the results of configure
-@@ -20415,9 +20415,6 @@
+@@ -21154,9 +21154,6 @@
      "stardict-withoutgnome.spec") CONFIG_FILES="$CONFIG_FILES stardict-withoutgnome.spec" ;;
      "data/Makefile") CONFIG_FILES="$CONFIG_FILES data/Makefile" ;;
      "doc/Makefile") CONFIG_FILES="$CONFIG_FILES doc/Makefile" ;;

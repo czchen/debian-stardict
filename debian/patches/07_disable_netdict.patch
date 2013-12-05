@@ -2,8 +2,8 @@ Author: Andrew Lee <andrew@linux.org.tw>
 Description: Patch from RedHat's bugzilla provided by Tomas Hoger.(CVE-2009-2260)
 --- a/dict/src/prefsdlg.cpp
 +++ b/dict/src/prefsdlg.cpp
-@@ -1158,6 +1158,10 @@
-     GtkWidget *hbox1 = gtk_hbox_new(FALSE, 6);
+@@ -1300,6 +1300,10 @@
+ #endif
      gtk_box_pack_start(GTK_BOX(hbox1),button,false,false,0);
      gtk_box_pack_start(GTK_BOX(vbox1),hbox1,false,false,0);
 +
