@@ -1,0 +1,18 @@
+Description: Fix zlib compiling error
+---
+Origin: upstream, https://code.google.com/p/stardict-3/source/diff?spec=svna154bccf74382cbe76710f0f6b3bbab1e56a0176&r=a154bccf74382cbe76710f0f6b3bbab1e56a0176&format=side&path=/lib/src/libcommon.h
+--- stardict-3.0.4.orig/lib/src/libcommon.h
++++ stardict-3.0.4/lib/src/libcommon.h
+@@ -188,7 +188,11 @@ namespace clib {
+ }
+ 
+ namespace zip {
+-typedef ResourceWrapper<void, void*, int, gzclose> gzFile;
++#if ZLIB_VERNUM > 0x1250
++	typedef ResourceWrapper<gzFile_s, gzFile, int, gzclose> gzFile;
++#else
++	typedef ResourceWrapper<void, void*, int, gzclose> gzFile;
++#endif
+ }
+ 
+ /* Create a new temporary file. Return file name in file name encoding.

@@ -2,3 +2,6 @@
 07_disable_netdict.patch
 08_gcc-4.6.patch
 09_fix_ftbfs_binutils_gold.patch
+10_fix_zlib_error.patch
+11_fix_gmodule.patch
+12_fix_libgucharm-2.90.patch

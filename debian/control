@@ -1,22 +1,24 @@
 Source: stardict
 Section: utils
 Priority: optional
-Maintainer: Andrew Lee (李健秋) <ajqlee@debian.org>
-Uploaders: Anthony Fok <foka@debian.org>
+Maintainer: ChangZhuo Chen (陳昌倬) <czchen@gmail.com>
+Uploaders:
+ Andrew Lee (李健秋) <ajqlee@debian.org>,
+ Anthony Fok <foka@debian.org>
 Build-Depends:
  debhelper (>= 8), autoconf, automake (>= 1.10), autotools-dev, intltool,
  gnome-doc-utils,
  libbonobo2-dev, libenchant-dev, libespeak-dev, libestools2.0-dev,
- libgconf2-dev, libgnomeui-dev, libgucharmap2-dev, libmysqlclient-dev,
+ libgconf2-dev, libgnomeui-dev, libgucharmap-2-90-dev, libmysqlclient-dev,
  liborbit2-dev, libpcre3-dev, libsigc++-2.0-dev (>= 2.0.18-2),
  libtool, libx11-dev,
  libxml-parser-perl, festival-dev, rarian-compat, sharutils,
  x11proto-core-dev, zlib1g-dev
 Build-Conflicts: autoconf2.13, automake1.4
-Standards-Version: 3.9.2
+Standards-Version: 3.9.5
 Homepage: http://www.stardict.org
-Vcs-Git: git://git.debian.org/git/collab-maint/stardict.git
-Vcs-Browser: http://git.debian.org/?p=collab-maint/stardict.git;a=summary
+Vcs-Git: http://anonscm.debian.org/git/collab-maint/stardict.git
+Vcs-Browser: http://anonscm.debian.org/gitweb/?p=collab-maint/stardict.git;a=summary
 
 
 Package: stardict
@@ -24,7 +26,7 @@ Architecture: all
 Depends:
  ${misc:Depends}, ${shlibs:Depends},
  stardict-gnome (>= ${source:Version}) | stardict-gtk (>= ${source:Version})
-Description: International dictionary lookup program.
+Description: International dictionary lookup program
  StarDict is a cross-platform international dictionary lookup program.
  .
  Main features:
@@ -80,7 +82,7 @@ Suggests: ttf-freefont, ttf-arphic-uming
 Replaces: stardict-gnome
 Conflicts: stardict-gnome
 Provides: stardict
-Description: International dictionary lookup program
+Description: International dictionary lookup program - GTK Support
  StarDict is a cross-platform international dictionary lookup program.
  .
  Main features:
@@ -238,7 +240,7 @@ Description: International dictionary lookup program - data files
 
 Package: stardict-tools
 Architecture: any
-Depends: ${misc:Depends}, ${python:Depends}, ${shlibs:Depends}, dictzip
+Depends: ${misc:Depends}, ${shlibs:Depends}, dictzip
 Suggests: babiloo | goldendict | qstardict | stardict | stardict-gtk
 Description: dictionary conversion tools of stardict
  StarDict is a cross-platform international dictionary lookup program.

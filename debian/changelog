@@ -1,3 +1,20 @@
+stardict (3.0.4+dfsg1-1) unstable; urgency=low
+
+  * New upstream release.
+  * Change maintainer to ChangZhuo Chen (陳昌倬) <czchen@gmail.com>
+  * Removed Windows executable for DFSG compliance
+  * Update Standards-Version to 3.9.5
+  * Update vcs information
+  * Update debian/watch for google code
+  * Update debian/copyright
+  * Refresh 02_makefile.patch
+  * Refresh 07_disable_netdict.patch
+  * Refresh 08_gcc-4.6.patch
+  * Add 10_fix_zlib_error.patch
+  * Add 11_fix_gmodule.patch
+
+ -- ChangZhuo Chen (陳昌倬) <czchen@gmail.com>  Thu, 05 Dec 2013 19:09:53 +0800
+
 stardict (3.0.3-1) unstable; urgency=low
 
   * Updating debian/watch file: upstream moved from sourceforge to googlecode.
