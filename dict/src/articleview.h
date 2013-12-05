@@ -26,14 +26,22 @@
 #include "pangoview.h" 
 #include "lib/dictbase.h"
 
+enum BookNameStyle
+{
+	BookNameStyle_Default,
+	BookNameStyle_OneBlankLine,
+	BookNameStyle_TwoBlankLines,
+};
+
 //class which show dictionary's articles
 class ArticleView {
 public:
-	ArticleView(GtkContainer *owner, bool floatw=false)
-		: bookindex(0), pango_view_(PangoWidgetBase::create(owner, floatw)),
+	ArticleView(GtkContainer *owner, BookNameStyle booknamestyle, bool floatw=false)
+		: bookindex(0), bookname_style(booknamestyle), pango_view_(PangoWidgetBase::create(owner, floatw)),
 		for_float_win(floatw), headerindex(-1) {}
-	ArticleView(GtkBox *owner, bool floatw=false)
-		: pango_view_(PangoWidgetBase::create(owner, floatw)),
+	ArticleView(GtkBox *owner, BookNameStyle booknamestyle, bool floatw=false)
+		:  bookname_style(booknamestyle),
+		pango_view_(PangoWidgetBase::create(owner, floatw)),
 		for_float_win(floatw), headerindex(-1) {}
 
 	void SetDictIndex(InstantDictIndex index);
@@ -63,17 +71,23 @@ public:
 	void end_update() { pango_view_->end_update(); }
 	void goto_begin() { pango_view_->goto_begin(); }
 	void goto_end() { pango_view_->goto_end(); }
-	void modify_bg(GtkStateType state, const GdkColor *color) { pango_view_->modify_bg(state, color); } 
+#if GTK_MAJOR_VERSION >= 3
+	void modify_bg(GtkStateFlags state, const GdkRGBA *color) { pango_view_->modify_bg(state, color); } 
+#else
+	void modify_bg(GtkStateType state, const GdkColor *color) { pango_view_->modify_bg(state, color); }
+#endif
 	GtkWidget *vscroll_bar() { return pango_view_->vscroll_bar(); }
 	void set_size(gint w, gint h) { pango_view_->set_size(w, h); }
 	gint scroll_space() { return pango_view_->scroll_space(); }
 	gdouble scroll_pos() { return pango_view_->scroll_pos(); }
 	void connect_on_link(const sigc::slot<void, const std::string &>& s);
 	unsigned int get_bookindex(void) { return bookindex; }
+	void set_bookname_style(BookNameStyle style) { bookname_style = style; }
 private:
 	struct ParseResultItemWithMark;
 
 	unsigned int bookindex;
+	BookNameStyle bookname_style;
 	std::auto_ptr<PangoWidgetBase> pango_view_;
 	bool for_float_win;
 	InstantDictIndex dict_index;
@@ -94,11 +108,11 @@ private:
 		bool& loaded);
 	void append_data_res_attachment(const std::string& key, const std::string& mark,
 		bool& loaded);
-	static void on_resource_button_destroy(GtkObject *object, gpointer user_data);
-	static void on_sound_button_clicked(GtkObject *object, gpointer user_data);
-	static void on_video_button_clicked(GtkObject *object, gpointer user_data);
-	static void on_attachment_button_clicked(GtkObject *object, gpointer user_data);
-	static void on_resource_button_realize(GtkObject *object, gpointer user_data);
+	static void on_resource_button_destroy(GtkWidget *object, gpointer user_data);
+	static void on_sound_button_clicked(GtkWidget *object, gpointer user_data);
+	static void on_video_button_clicked(GtkWidget *object, gpointer user_data);
+	static void on_attachment_button_clicked(GtkWidget *object, gpointer user_data);
+	static void on_resource_button_realize(GtkWidget *object, gpointer user_data);
 };
 
 

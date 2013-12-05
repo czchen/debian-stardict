@@ -27,7 +27,7 @@
 #include "readword.h"
 
 const guint MAX_HISTORY_WORD_ITEM_NUM=20;
-const guint MAX_BACK_WORD_ITEM_NUM=20;
+const guint MAX_BACK_WORD_ITEM_NUM=10;
 
 const int MIN_WINDOW_WIDTH=200;
 const int MIN_WINDOW_HEIGHT=100;
@@ -63,21 +63,23 @@ struct BackListData {
 class TopWin {
 private:
 	gboolean enable_change_cb;
-	GSList *BackList;
-	GtkWidget *HistoryMenu;
-	GtkWidget *BackMenu;
+	GList *BackList;
+	guint BackList_index;
+	GtkWidget *SearchMenu;
 	GtkWidget* WordCombo;
+	GtkWidget *back_button;
+	GtkWidget *forward_button;
 
-	static gint HisCompareFunc(gconstpointer a,gconstpointer b);
-	static gint BackListDataCompareFunc(gconstpointer a,gconstpointer b);
-
-	static void ClearCallback(GtkWidget *widget, TopWin *oTopWin);
 	static void GoCallback(GtkWidget *widget, TopWin *oTopWin);
 	static void BackCallback(GtkWidget *widget, TopWin *oTopWin);
+	static void ForwardCallback(GtkWidget *widget, TopWin *oTopWin);
 	static void MenuCallback(GtkWidget *widget, TopWin *oTopWin);
-	static gboolean on_back_button_press(GtkWidget * widget, GdkEventButton * event , TopWin *oTopWin);
-	static void on_back_menu_item_activate(GtkMenuItem *menuitem, gint index);
 
+	static void do_search_by_fuzzyquery (GtkWidget *item, TopWin *oTopWin);
+	static void do_search_by_patternmatch (GtkWidget *item, TopWin *oTopWin);
+	static void do_search_by_regularmatch (GtkWidget *item, TopWin *oTopWin);
+	static void do_search_by_fulltextsearch (GtkWidget *item, TopWin *oTopWin);
+	static void on_entry_icon_press(GtkEntry *entry, gint position, GdkEventButton *event, TopWin *oTopWin);
 	static void on_entry_changed(GtkEntry *entry, TopWin *oTopWin);
 	static void on_entry_activate(GtkEntry *entry, TopWin *oTopWin);
 	static void on_entry_populate_popup(GtkEntry *entry, GtkMenu  *menu, TopWin *oTopWin);
@@ -87,6 +89,7 @@ private:
 	static void on_main_menu_preferences_activate(GtkMenuItem *menuitem, TopWin *oTopWin);
 	static void on_main_menu_dictmanage_activate(GtkMenuItem *menuitem, TopWin *oTopWin);
 	static void on_main_menu_pluginmanage_activate(GtkMenuItem *menuitem, TopWin *oTopWin);
+	static void on_main_menu_downloaddict_activate(GtkMenuItem *menuitem, TopWin *oTopWin);
 	static void on_main_menu_newversion_activate(GtkMenuItem *menuitem, TopWin *oTopWin);
 	static void on_main_menu_help_activate(GtkMenuItem *menuitem, TopWin *oTopWin);
 	static void on_main_menu_about_activate(GtkMenuItem *menuitem, TopWin *oTopWin);
@@ -104,33 +107,35 @@ public:
 	void Destroy(void);
 	void SetText(const gchar *word, bool notify=true);
 	//void SetText_without_notify(const gchar *word);
+	void clear_entry();
 	void TextSelectAll();	
 	void InsertHisList(const gchar *word);
 	void InsertBackList(const gchar *word = NULL);
 	void do_back();
+	void do_forward();
 	void do_prev();
 	void do_next();
 	void do_menu();
 
 	gboolean TextSelected();
 	bool has_focus() {
-		return gtk_widget_has_focus(GTK_WIDGET(GTK_BIN(WordCombo)->child));
+		return gtk_widget_has_focus(gtk_bin_get_child(GTK_BIN(WordCombo)));
 	}
 	static void ClipboardReceivedCallback(GtkClipboard *clipboard, const gchar *text, gpointer data);
 
 	void set_position_in_text(gint pos) {
-		gtk_editable_set_position(GTK_EDITABLE(GTK_BIN(WordCombo)->child), pos);
+		gtk_editable_set_position(GTK_EDITABLE(gtk_bin_get_child(GTK_BIN(WordCombo))), pos);
 	}
 	void select_region_in_text(gint beg, gint end) {
-		gtk_editable_select_region(GTK_EDITABLE(GTK_BIN(WordCombo)->child), beg, end);
+		gtk_editable_select_region(GTK_EDITABLE(gtk_bin_get_child(GTK_BIN(WordCombo))), beg, end);
 	}
 	const gchar *get_text() {
 		if (!WordCombo)
 			return "";
-		return gtk_entry_get_text(GTK_ENTRY(GTK_BIN(WordCombo)->child));
+		return gtk_entry_get_text(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(WordCombo))));
 	}
 	void grab_focus() {
-		gtk_widget_grab_focus(GTK_BIN(WordCombo)->child);
+		gtk_widget_grab_focus(gtk_bin_get_child(GTK_BIN(WordCombo)));
 	}
 };
 
@@ -267,6 +272,7 @@ public:
   void Show(NetDictResponse *resp);
   gboolean Find (const gchar *text, gboolean start);
 	bool IsSearchPanelHasFocus() { return gtk_widget_has_focus(GTK_WIDGET(eSearch)); }
+	void set_bookname_style(BookNameStyle style);
 
 	void ShowSearchPanel();
 	void HideSearchPanel();
@@ -311,7 +317,7 @@ private:
 	static void on_fromlang_combobox_changed(GtkWidget *widget, TransWin *oTransWin);
 	static void on_tolang_combobox_changed(GtkWidget *widget, TransWin *oTransWin);
 	static void on_link_eventbox_clicked(GtkWidget *widget, GdkEventButton *event, TransWin *oTransWin);
-	static void on_destroy(GtkObject *object, TransWin* oTransWin);
+	static void on_destroy(GtkWidget *object, TransWin* oTransWin);
 	void on_translate_error(const char * error_msg);
 	void on_translate_response(const char * text);
 	void SetLink(gint engine_index);

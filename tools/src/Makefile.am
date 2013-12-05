@@ -4,9 +4,9 @@ COMMONLIB_LIB = $(top_builddir)/$(COMMONLIB_LIBRARY)
 
 SUBDIRS= 
 
-bin_PROGRAMS = stardict-editor
+bin_PROGRAMS =
 
-noinst_PROGRAMS = pydict2dic olddic2newdic oxford2dic directory2dic dictd2dic \
+noinst_PROGRAMS = stardict-editor pydict2dic olddic2newdic oxford2dic directory2dic dictd2dic \
 	wquick2dic ec50 directory2treedic treedict2dir jdictionary mova xmlinout \
 	soothill kanjidic2 powerword kdic 21tech 21shiji buddhist tabfile \
 	cedict edict duden stardict-dict-update degb2utf frgb2utf jpgb2utf gmx2utf \
@@ -155,12 +155,12 @@ wikipedia_LDADD = $(STARDICT_LIBS) $(LFS_LIBS)
 wikipedia_SOURCES = wikipedia.cpp
 
 wikipediaImage_CPPFLAGS = $(AM_CPPFLAGS) $(MYSQL_CFLAGS)
-wikipediaImage_LDFLAGS = $(MYSQL_LDFLAGS)
+wikipediaImage_INCLUDES = $(MYSQL_INCLUDES)
 wikipediaImage_LDADD = $(STARDICT_LIBS) $(MYSQL_LIBS)
 wikipediaImage_SOURCES = wikipediaImage.cpp
 
 tabfile2sql_CPPFLAGS = $(AM_CPPFLAGS) $(MYSQL_CFLAGS)
-tabfile2sql_LDFLAGS = $(MYSQL_LDFLAGS)
+tabfile2sql_INCLUDES = $(MYSQL_INCLUDES)
 tabfile2sql_LDADD = $(STARDICT_LIBS) $(MYSQL_LIBS)
 tabfile2sql_SOURCES = tabfile2sql.cpp
 
@@ -285,8 +285,9 @@ stardict_editor_SOURCES = stardict-editor.cpp libtabfile.cpp libtabfile.h \
 
 EXTRA_DIST = example.ifo example_treedict.tar.bz2 hanzim2dict.py \
 	jm2stardict.py uyghur2dict.py ncce2stardict.pl parse-oxford.perl \
-	dictgen.php DeKDic.exe KSDrip.exe Po2Tab.zip dictd2dic.sh ooo.sh myspell.sh \
+	dictgen.php DeKDic.exe KSDrip.exe Po2Tab.zip ooo.sh myspell.sh \
 	exc.sh i2e.sh dictbuilder.readme dictbuilder.example KangXiZiDian-djvu2tiff.py \
 	extractKangXi.py makevietdict.py mkguangyunst.py stmerge.py \
 	lingea-trd-decoder.py \
+	dicts-dump.pl \
 	stardict_images.sh stardict_images.py

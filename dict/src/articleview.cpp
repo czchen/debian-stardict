@@ -404,28 +404,62 @@ void ArticleView::AppendHeaderMark()
 
 void ArticleView::AppendHeader(const char *dict_name, const char *dict_link)
 {
-	if(++headerindex > 0)
-		append_pango_text("\n\n");
+	if (bookname_style == BookNameStyle_Default) {
+	} else if (bookname_style == BookNameStyle_OneBlankLine) {
+		if(++headerindex > 0)
+			append_pango_text("\n");
+	} else {
+		if(++headerindex > 0)
+			append_pango_text("\n\n");
+	}
 	AppendHeaderMark();
 	if (dict_link) {
-		std::string mark= "<span foreground=\"blue\"><u>";
+		std::string mark;
+		if ((bookname_style == BookNameStyle_Default) || (bookname_style == BookNameStyle_OneBlankLine)) {
+			mark= "<span foreground=\"blue\">&lt;--- <u>";
+		} else {
+			mark= "<span foreground=\"blue\"><u>";
+		}
 		LinksPosList links_list;
 		std::string link(dict_link);
 		links_list.push_back(LinkDesc(5, g_utf8_strlen(dict_name, -1), link));
 		gchar *m_str = g_markup_escape_text(dict_name, -1);
 		mark += m_str;
 		g_free(m_str);
-		mark += "</u></span>\n";
+		if ((bookname_style == BookNameStyle_Default) || (bookname_style == BookNameStyle_OneBlankLine)) {
+			mark += "</u> ---&gt;</span>\n";
+		} else {
+			mark += "</u></span>\n";
+		}
 		append_pango_text_with_links(mark, links_list);
 	} else {
 		std::string mark= "<span foreground=\"blue\">";
+#ifdef CONFIG_GPE
+		if ((bookname_style == BookNameStyle_Default) || (bookname_style == BookNameStyle_OneBlankLine)) {
+			mark+= "&lt;- ";
+		} else {
+		}
+#else
+		if ((bookname_style == BookNameStyle_Default) || (bookname_style == BookNameStyle_OneBlankLine)) {
+			mark+= "&lt;--- ";
+		} else {
+		}
+#endif
 		gchar *m_str = g_markup_escape_text(dict_name, -1);
 		mark += m_str;
 		g_free(m_str);
 #ifdef CONFIG_GPE
-		mark += "</span>\n";
+		if ((bookname_style == BookNameStyle_Default) || (bookname_style == BookNameStyle_OneBlankLine)) {
+			mark += " -&gt;</span>\n";
+		} else {
+			mark += "</span>\n";
+		}
 #else
-		mark += "</span>\n";
+		if ((bookname_style == BookNameStyle_Default) || (bookname_style == BookNameStyle_OneBlankLine)) {
+			mark += " ---&gt;</span>\n";
+		} else {
+			mark += "</span>\n";
+		}
 #endif
 		append_pango_text(mark.c_str());
 	}
@@ -914,12 +948,12 @@ void ArticleView::append_data_res_attachment(
 	}
 }
 
-void ArticleView::on_resource_button_destroy(GtkObject *object, gpointer user_data)
+void ArticleView::on_resource_button_destroy(GtkWidget *object, gpointer user_data)
 {
 	delete (ResData*)user_data;
 }
 
-void ArticleView::on_sound_button_clicked(GtkObject *object, gpointer user_data)
+void ArticleView::on_sound_button_clicked(GtkWidget *object, gpointer user_data)
 {
 	ResData *pResData = (ResData*)user_data;
 	if(const char *filename = pResData->get_url())
@@ -928,7 +962,7 @@ void ArticleView::on_sound_button_clicked(GtkObject *object, gpointer user_data)
 		g_warning("Unable to load resource: %s", pResData->get_key().c_str());
 }
 
-void ArticleView::on_video_button_clicked(GtkObject *object, gpointer user_data)
+void ArticleView::on_video_button_clicked(GtkWidget *object, gpointer user_data)
 {
 	ResData *pResData = (ResData*)user_data;
 	if(const char *filename = pResData->get_url())
@@ -937,7 +971,7 @@ void ArticleView::on_video_button_clicked(GtkObject *object, gpointer user_data)
 		g_warning("Unable to load resource: %s", pResData->get_key().c_str());
 }
 
-void ArticleView::on_attachment_button_clicked(GtkObject *object, gpointer user_data)
+void ArticleView::on_attachment_button_clicked(GtkWidget *object, gpointer user_data)
 {
 	ResData *pResData = (ResData*)user_data;
 	const std::string& key = pResData->get_key();
@@ -971,7 +1005,7 @@ void ArticleView::on_attachment_button_clicked(GtkObject *object, gpointer user_
 	gtk_widget_destroy(dialog);
 }
 
-void ArticleView::on_resource_button_realize(GtkObject *object, gpointer user_data)
+void ArticleView::on_resource_button_realize(GtkWidget *object, gpointer user_data)
 {
 	/* Event boxes are not automatically realized by GTK+, they must be realized
 	 * explicitly. You need to make sure that an event box is already added as 
@@ -979,5 +1013,11 @@ void ArticleView::on_resource_button_realize(GtkObject *object, gpointer user_da
 	 * handler is a good place for that (imho). */
 	GtkWidget *eventbox = GTK_WIDGET(user_data);
 	gtk_widget_realize(eventbox);
-	gdk_window_set_cursor(eventbox->window, gdk_cursor_new(GDK_HAND2));
+	GdkCursor *cursor = gdk_cursor_new(GDK_HAND2);
+	gdk_window_set_cursor(gtk_widget_get_window(eventbox), cursor);
+#if GTK_MAJOR_VERSION >= 3
+	g_object_unref(cursor);
+#else
+	gdk_cursor_unref(cursor);
+#endif
 }
