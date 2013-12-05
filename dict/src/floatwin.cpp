@@ -66,13 +66,17 @@ void FloatWin::Create()
 	gtk_frame_set_shadow_type(GTK_FRAME(frame),GTK_SHADOW_ETCHED_OUT);
 	gtk_container_add(GTK_CONTAINER(FloatWindow),frame);
 	GtkWidget *vbox;
+#if GTK_MAJOR_VERSION >= 3
+	vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
+#else
 	vbox = gtk_vbox_new(false,0);
+#endif
 	gtk_container_set_border_width (GTK_CONTAINER (vbox), FLOATWIN_BORDER_WIDTH);
 	gtk_container_add(GTK_CONTAINER(frame),vbox);
 
 	create_button_hbox();
 	gtk_box_pack_start(GTK_BOX(vbox),button_hbox,false,false,0);
-	view.reset(new ArticleView(GTK_BOX(vbox), true));
+	view.reset(new ArticleView(GTK_BOX(vbox), (BookNameStyle)conf->get_int_at("dictionary/bookname_style"), true));
 	
 	gtk_widget_show_all(frame);
 	gtk_widget_hide(button_hbox); //show all will show hbox's children,now hide hbox only.
@@ -92,14 +96,9 @@ void FloatWin::Create()
 	conf->notify_add("/apps/stardict/preferences/floating_window/transparent",
 			 sigc::mem_fun(this, &FloatWin::on_transparent_changed));
 
-	conf->notify_add("/apps/stardict/preferences/floating_window/bg_red",
-			 sigc::mem_fun(this, &FloatWin::on_bg_red_changed));
-	conf->notify_add("/apps/stardict/preferences/floating_window/bg_green",
-			 sigc::mem_fun(this, &FloatWin::on_bg_green_changed));
-	conf->notify_add("/apps/stardict/preferences/floating_window/bg_blue",
-			 sigc::mem_fun(this, &FloatWin::on_bg_blue_changed));
 	conf->notify_add("/apps/stardict/preferences/floating_window/use_custom_bg",
 			 sigc::mem_fun(this, &FloatWin::on_use_custom_bg_changed));
+	gtk_widget_realize(FloatWindow);
 }
 
 void FloatWin::End()
@@ -201,10 +200,11 @@ void FloatWin::AppendTextLocalDict(gchar ***Word, gchar ****WordData, const gcha
 	gboolean pronounced = false;
 	readwordtype = gpAppFrame->oReadWord.canRead(sOriginWord);
 	if (readwordtype != READWORD_CANNOT) {
-		if (PronounceWord == sOriginWord)
+		if (PronounceWord == sOriginWord) {
 			pronounced = true;
-		else
+		} else {
 			PronounceWord = sOriginWord;
+		}
 	} else {
 		for (size_t i=0;i< gpAppFrame->scan_dictmask.size(); i++) {
 			if (Word[i] && strcmp(Word[i][0], sOriginWord)) {
@@ -440,13 +440,14 @@ void FloatWin::ShowPangoTips(const char *sWord, const char *text)
 	IgnoreScanModifierKey = false;
 	destroy_lookup_running_timer();
 
-	gboolean pronounced = false;
+	//gboolean pronounced = false;
 	readwordtype = gpAppFrame->oReadWord.canRead(sWord);
 	if (readwordtype != READWORD_CANNOT) {
-		if (PronounceWord == sWord)
-			pronounced = true;
-		else
+		if (PronounceWord == sWord) {
+			//pronounced = true;
+		} else {
 			PronounceWord = sWord;
+		}
 	}
 	gtk_widget_set_sensitive(PronounceWordButton, readwordtype != READWORD_CANNOT);
 
@@ -555,7 +556,13 @@ gint FloatWin::vHideWindowTimeOutCallback(gpointer data)
 		GdkScreen *screen = gtk_window_get_screen(GTK_WINDOW(oFloatWin->FloatWindow));
 		GdkDisplay *display = gdk_screen_get_display(screen);
 		gint iCurrentX,iCurrentY;
+#if GTK_MAJOR_VERSION >= 3
+		GdkDeviceManager *device_manager = gdk_display_get_device_manager (display);
+		GdkDevice  *pointer = gdk_device_manager_get_client_pointer (device_manager);
+		gdk_device_get_position(pointer, NULL, &iCurrentX, &iCurrentY);
+#else
 		gdk_display_get_pointer(display, NULL, &iCurrentX, &iCurrentY, NULL);
+#endif
 		if (iCurrentX == oFloatWin->popup_pointer_x && iCurrentY==oFloatWin->popup_pointer_y) {
 			bool released = !gpAppFrame->unlock_keys->is_pressed();
 
@@ -739,21 +746,6 @@ void FloatWin::on_transparent_changed(const baseconfval* val)
 	set_transparent(transparent);
 }
 
-void FloatWin::on_bg_red_changed(const baseconfval* )
-{
-	set_bg();
-}
-
-void FloatWin::on_bg_green_changed(const baseconfval* )
-{
-	set_bg();
-}
-
-void FloatWin::on_bg_blue_changed(const baseconfval* )
-{
-	set_bg();
-}
-
 void FloatWin::on_use_custom_bg_changed(const baseconfval* )
 {
 	set_bg();
@@ -765,7 +757,11 @@ gint FloatWin::get_vscrollbar_width(void)
 	if (!vscrollbar_width) {
 		if (view->vscroll_bar()) {
 			GtkRequisition vscrollbar_requisition;
+#if GTK_MAJOR_VERSION >= 3
+			gtk_widget_get_preferred_size(view->vscroll_bar(), NULL, &vscrollbar_requisition);
+#else
 			gtk_widget_size_request(view->vscroll_bar(), &vscrollbar_requisition);
+#endif
 			vscrollbar_width = vscrollbar_requisition.width;
 			vscrollbar_width += view->scroll_space();
 		}
@@ -775,19 +771,27 @@ gint FloatWin::get_vscrollbar_width(void)
 
 gint FloatWin::get_window_border_width(void)
 {
-	return 2*(FLOATWIN_BORDER_WIDTH+2); // 2 is the frame 's width.or get it by gtk function? i am lazy,hoho
+	return 2*(FLOATWIN_BORDER_WIDTH+2); // 2 is the frame 's width. Or get it by gtk function? i am lazy,hoho
 }
 
 void FloatWin::float_window_size(gint& window_width, gint& window_height)
 {
 	GtkRequisition requisition;
+#if GTK_MAJOR_VERSION >= 3
+	gtk_widget_get_preferred_size(view->widget(), NULL, &requisition);
+#else
 	gtk_widget_size_request(view->widget(), &requisition);
+#endif
 	int max_window_width=conf->get_int_at("floating_window/max_window_width");
 	if (requisition.width > max_window_width) {
 		// it is not really max window width setting.
 		gtk_widget_set_size_request(view->widget(), max_window_width, -1);
 		gtk_label_set_line_wrap(GTK_LABEL(view->widget()), true);
+#if GTK_MAJOR_VERSION >= 3
+		gtk_widget_get_preferred_size(view->widget(), NULL, &requisition); //update requisition
+#else
 		gtk_widget_size_request(view->widget(), &requisition); //update requisition
+#endif
 	}
 	window_width = get_window_border_width() + requisition.width;
 	int max_window_height=
@@ -804,9 +808,11 @@ void FloatWin::float_window_size(gint& window_width, gint& window_height)
 	
 	gboolean button_hbox_visible = gtk_widget_get_visible(GTK_WIDGET(button_hbox));
 	if (button_hbox_visible) {
-		window_height += button_hbox->allocation.height;
-		if (window_width < button_hbox->allocation.width + get_window_border_width())
-			window_width = button_hbox->allocation.width + get_window_border_width();
+		GtkAllocation allocation;
+		gtk_widget_get_allocation(button_hbox, &allocation);
+		window_height += allocation.height;
+		if (window_width < allocation.width + get_window_border_width())
+			window_width = allocation.width + get_window_border_width();
 	}
 }
 
@@ -816,7 +822,13 @@ void FloatWin::float_window_position(gboolean usePointerPosition,
 	GdkScreen *screen = gtk_window_get_screen(GTK_WINDOW(FloatWindow));
 	if (usePointerPosition) {
 		GdkDisplay *display = gdk_screen_get_display(screen);
+#if GTK_MAJOR_VERSION >= 3
+		GdkDeviceManager *device_manager = gdk_display_get_device_manager (display);
+		GdkDevice  *pointer = gdk_device_manager_get_client_pointer (device_manager);
+		gdk_device_get_position (pointer, NULL, &x, &y);
+#else
 		gdk_display_get_pointer(display, NULL, &x, &y, NULL);
+#endif
 		x += FLOATWIN_OFFSET_X;
 		y += FLOATWIN_OFFSET_Y;
 	} else {
@@ -838,7 +850,13 @@ void FloatWin::remember_pointer_position(void)
 	if (pressed) {
 		GdkScreen *screen = gtk_window_get_screen(GTK_WINDOW(FloatWindow));
 		GdkDisplay *display = gdk_screen_get_display(screen);
+#if GTK_MAJOR_VERSION >= 3
+		GdkDeviceManager *device_manager = gdk_display_get_device_manager (display);
+		GdkDevice  *pointer = gdk_device_manager_get_client_pointer (device_manager);
+		gdk_device_get_position(pointer, NULL, &popup_pointer_x, &popup_pointer_y);
+#else
 		gdk_display_get_pointer(display, NULL, &popup_pointer_x, &popup_pointer_y, NULL);
+#endif
 	} else {
 		// popup by middle click on the notification area icon, 
 		// so never hiden the floating window even mouse didn't moved as in FloatWin::vHideWindowTimeOutCallback().
@@ -879,7 +897,11 @@ void FloatWin::Popup(gboolean updatePosition)
 
 void FloatWin::create_button_hbox(void)
 {
+#if GTK_MAJOR_VERSION >= 3
+	button_hbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+#else
 	button_hbox = gtk_hbox_new(false,0);
+#endif
 	
 	GtkWidget *button;
 	button= gtk_button_new();
@@ -954,7 +976,13 @@ int FloatWin::get_distance_pointer_to_window(void)
 	GdkScreen *screen = gtk_window_get_screen(GTK_WINDOW(FloatWindow));
 	GdkDisplay *display = gdk_screen_get_display(screen);
 	gint iCurrentX,iCurrentY;
+#if GTK_MAJOR_VERSION >= 3
+	GdkDeviceManager *device_manager = gdk_display_get_device_manager (display);
+	GdkDevice  *pointer = gdk_device_manager_get_client_pointer (device_manager);
+	gdk_device_get_position(pointer, NULL, &iCurrentX, &iCurrentY);
+#else
 	gdk_display_get_pointer(display, NULL, &iCurrentX, &iCurrentY, NULL);
+#endif
 	gint window_x,window_y,window_width,window_height;
 	gtk_window_get_position(GTK_WINDOW(FloatWindow),&window_x,&window_y);
 	//notice: gtk_window_get_size() is not really uptodate,don't use it! see "gtk reference".
@@ -994,7 +1022,11 @@ void FloatWin::button_box_show_first_time(void)
 	gint screen_width = gdk_screen_get_width(screen);
 	gint screen_height = gdk_screen_get_height(screen);
 	GtkRequisition requisition;
+#if GTK_MAJOR_VERSION >= 3
+	gtk_widget_get_preferred_size(button_hbox, NULL, &requisition);
+#else
 	gtk_widget_size_request(button_hbox,&requisition);
+#endif
 	now_window_height += requisition.height;
 	requisition.width += get_window_border_width();
 	if (requisition.width > now_window_width)
@@ -1030,16 +1062,19 @@ void FloatWin::show_popup_menu(GdkEventButton * event)
 	GtkWidget *image;
 	image = gtk_image_new_from_stock(GTK_STOCK_COPY, GTK_ICON_SIZE_MENU);
 	gtk_image_menu_item_set_image(GTK_IMAGE_MENU_ITEM(menuitem), image);
+	gtk_image_menu_item_set_always_show_image (GTK_IMAGE_MENU_ITEM (menuitem), TRUE);
 	g_signal_connect(G_OBJECT(menuitem), "activate", G_CALLBACK(on_menu_copy_activate), this);
 	gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuitem);
 	menuitem = gtk_image_menu_item_new_with_mnemonic(_("_Save"));
 	image = gtk_image_new_from_stock(GTK_STOCK_SAVE, GTK_ICON_SIZE_MENU);
 	gtk_image_menu_item_set_image(GTK_IMAGE_MENU_ITEM(menuitem), image);
+	gtk_image_menu_item_set_always_show_image (GTK_IMAGE_MENU_ITEM (menuitem), TRUE);
 	g_signal_connect(G_OBJECT(menuitem), "activate", G_CALLBACK(on_menu_save_activate), this);
 	gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuitem);
 	menuitem = gtk_image_menu_item_new_with_mnemonic(_("_Query"));
 	image = gtk_image_new_from_stock(GTK_STOCK_FIND, GTK_ICON_SIZE_MENU);
 	gtk_image_menu_item_set_image(GTK_IMAGE_MENU_ITEM(menuitem), image);
+	gtk_image_menu_item_set_always_show_image (GTK_IMAGE_MENU_ITEM (menuitem), TRUE);
 	g_signal_connect(G_OBJECT(menuitem), "activate", G_CALLBACK(on_menu_query_activate), this);
 	gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuitem);
 
@@ -1047,13 +1082,15 @@ void FloatWin::show_popup_menu(GdkEventButton * event)
 		menuitem = gtk_image_menu_item_new_with_mnemonic(_("_Play"));
 		image = gtk_image_new_from_stock(GTK_STOCK_EXECUTE, GTK_ICON_SIZE_MENU);
 		gtk_image_menu_item_set_image(GTK_IMAGE_MENU_ITEM(menuitem), image);
+		gtk_image_menu_item_set_always_show_image (GTK_IMAGE_MENU_ITEM (menuitem), TRUE);
 		g_signal_connect(G_OBJECT(menuitem), "activate", G_CALLBACK(on_menu_play_activate), this);
 		gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuitem);
 	}
 
-	menuitem = gtk_image_menu_item_new_with_mnemonic(_("_Fuzzy Query"));
+	menuitem = gtk_image_menu_item_new_with_mnemonic(_("_Fuzzy query"));
 	image = gtk_image_new_from_stock(GTK_STOCK_FIND_AND_REPLACE, GTK_ICON_SIZE_MENU);
 	gtk_image_menu_item_set_image(GTK_IMAGE_MENU_ITEM(menuitem), image);
+	gtk_image_menu_item_set_always_show_image (GTK_IMAGE_MENU_ITEM (menuitem), TRUE);
 	g_signal_connect(G_OBJECT(menuitem), "activate", G_CALLBACK(on_menu_fuzzyquery_activate), this);
 	gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuitem);
 	
@@ -1070,6 +1107,19 @@ void FloatWin::set_transparent(int transparent)
 
 void FloatWin::set_bg(void)
 {
+#if GTK_MAJOR_VERSION >= 3
+	GdkRGBA color;
+	const GdkRGBA *pcolor = NULL;
+	if (conf->get_bool_at("floating_window/use_custom_bg")) {
+		color.red = conf->get_double_at("floating_window/bg_red");
+		color.green = conf->get_double_at("floating_window/bg_green");
+		color.blue = conf->get_double_at("floating_window/bg_blue");
+		color.alpha = 1;
+		pcolor = &color;
+	}
+	gtk_widget_override_background_color(FloatWindow, GTK_STATE_FLAG_NORMAL, pcolor);
+	view->modify_bg(GTK_STATE_FLAG_NORMAL, pcolor);
+#else
 	GdkColor color;
 	const GdkColor *pcolor = NULL;
 	if (conf->get_bool_at("floating_window/use_custom_bg")) {
@@ -1080,6 +1130,14 @@ void FloatWin::set_bg(void)
 	}
 	gtk_widget_modify_bg(FloatWindow, GTK_STATE_NORMAL, pcolor);
 	view->modify_bg(GTK_STATE_NORMAL, pcolor);
+#endif
+}
+
+void FloatWin::set_bookname_style(BookNameStyle style)
+{
+	if (view.get()) {
+		view->set_bookname_style(style);
+	}
 }
 
 const gchar* FloatWin::get_lock_image_stock_id(void)
@@ -1154,12 +1212,12 @@ std::string FloatWin::get_head_word_markup(const gchar* sWord)
 
 void FloatWin::set_busy_cursor(void)
 {
-	gdk_window_set_cursor(FloatWindow->window, get_impl(gpAppFrame->oAppSkin.watch_cursor));
+	gdk_window_set_cursor(gtk_widget_get_window(FloatWindow), get_impl(gpAppFrame->oAppSkin.watch_cursor));
 }
 
 void FloatWin::set_normal_cursor(void)
 {
-	gdk_window_set_cursor(FloatWindow->window, get_impl(gpAppFrame->oAppSkin.normal_cursor));
+	gdk_window_set_cursor(gtk_widget_get_window(FloatWindow), get_impl(gpAppFrame->oAppSkin.normal_cursor));
 }
 
 void FloatWin::start_hide_window_timer(void)

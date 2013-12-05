@@ -39,9 +39,9 @@ const int DEFAULT_WINDOW_WIDTH=238;
 const int DEFAULT_WINDOW_HEIGHT=279;
 const int DEFAULT_HPANED_POS=79;
 #else
-const int DEFAULT_WINDOW_WIDTH=463;
-const int DEFAULT_WINDOW_HEIGHT=321;
-const int DEFAULT_HPANED_POS=127;
+const int DEFAULT_WINDOW_WIDTH=600;
+const int DEFAULT_WINDOW_HEIGHT=390;
+const int DEFAULT_HPANED_POS=120;
 #endif
 
 std::auto_ptr<AppConf> conf;
@@ -125,6 +125,7 @@ AppConf::AppConf() :
 	add_entry("/apps/stardict/preferences/dictionary/tts_program_cmdline", std::string()); // absolute command
 	add_entry("/apps/stardict/preferences/main_window/hide_list", false);
 	add_entry("/apps/stardict/preferences/dictionary/scan_selection", true);
+	add_entry("/apps/stardict/preferences/dictionary/bookname_style", 0);
 	add_entry("/apps/stardict/preferences/dictionary/markup_search_word", false);
 #ifdef _WIN32
 	add_entry("/apps/stardict/preferences/dictionary/scan_clipboard", false);
@@ -142,9 +143,15 @@ AppConf::AppConf() :
 	add_entry("/apps/stardict/preferences/floating_window/lock", false);
 	add_entry("/apps/stardict/preferences/floating_window/show_if_not_found", true);
 	add_entry("/apps/stardict/preferences/floating_window/use_custom_bg", false);
+#if GTK_MAJOR_VERSION >= 3
+	add_entry("/apps/stardict/preferences/floating_window/bg_red", 1.0);
+	add_entry("/apps/stardict/preferences/floating_window/bg_green", 1.0);
+	add_entry("/apps/stardict/preferences/floating_window/bg_blue", (51200/(double)65535));
+#else
 	add_entry("/apps/stardict/preferences/floating_window/bg_red", 65535);
 	add_entry("/apps/stardict/preferences/floating_window/bg_green", 65535);
 	add_entry("/apps/stardict/preferences/floating_window/bg_blue", 51200);
+#endif
 	add_entry("/apps/stardict/preferences/floating_window/transparent", 0);
 
 	add_entry("/apps/stardict/preferences/floating_window/lock_x", 0);
@@ -173,9 +180,11 @@ AppConf::AppConf() :
 	add_entry("/apps/stardict/preferences/dictionary/add_new_dict_in_active_group", true);
 	add_entry("/apps/stardict/preferences/dictionary/add_new_plugin_in_active_group", true);
 
-	add_entry("/apps/stardict/preferences/dictionary/sound_play_command", std::string("play")); // absolute command
 #if defined(_WIN32)
+	add_entry("/apps/stardict/preferences/dictionary/sound_play_command", std::string("play")); // absolute command
 	add_entry("/apps/stardict/preferences/dictionary/always_use_sound_play_command", false);
+#else
+	add_entry("/apps/stardict/preferences/dictionary/sound_play_command", std::string("aplay")); // absolute command
 #endif
 	add_entry("/apps/stardict/preferences/dictionary/video_play_command", std::string("play")); // absolute command
 #if defined(CONFIG_GPE)
@@ -474,7 +483,7 @@ AppDirs::AppDirs(const std::string& dirs_config_file)
 	user_config_dir = t_path;
 #endif
 	if (!g_file_test(user_config_dir.c_str(), G_FILE_TEST_IS_DIR)) {
-		if (-1 == g_mkdir(user_config_dir.c_str(), S_IRWXU))
+		if (-1 == g_mkdir_with_parents(user_config_dir.c_str(), S_IRWXU))
 			g_warning(_("Cannot create user config directory %s."), 
 				user_config_dir.c_str());
 	}
@@ -569,8 +578,8 @@ std::string AppDirs::get_default_user_config_dir(void) const
 	res += G_DIR_SEPARATOR_S "StarDict";
 	return res;
 #else
-	std::string res = g_get_home_dir();
-	res += G_DIR_SEPARATOR_S ".stardict";
+	std::string res = g_get_user_config_dir();
+	res += G_DIR_SEPARATOR_S "stardict";
 	return res;
 #endif
 }

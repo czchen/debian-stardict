@@ -41,10 +41,10 @@
 
 #ifdef CONFIG_GNOME
 #  include <libgnome/libgnome.h>
-#  include <libgnomeui/libgnomeui.h>
 #endif
 
 #ifdef CONFIG_GNOME
+#  include <bonobo/bonobo-main.h>
 #  include "stardict-application-server.h"
 #  include "GNOME_Stardict.h"
 #endif
@@ -257,7 +257,12 @@ void AppCore::Create(const gchar *queryword)
 				g_strdup_printf("style \"custom-font\" { font_name= \"%s\" }\n"
 						"class \"GtkWidget\" style \"custom-font\"\n",
 						custom_font.c_str());
+#if GTK_MAJOR_VERSION >= 3
+			GtkCssProvider *css_provider = gtk_css_provider_get_default();
+			gtk_css_provider_load_from_data(css_provider, aa, -1, NULL);
+#else
 			gtk_rc_parse_string(aa);
+#endif
 			g_free(aa);
 		}
 	}
@@ -306,6 +311,7 @@ void AppCore::Create(const gchar *queryword)
 	oStarDictPlugins = new StarDictPlugins(conf_dirs->get_plugin_dir(),
 		plugin_order_list,
 		plugin_disable_list);
+
 	oLibs.set_show_progress(&load_show_progress);
 	std::list<DictItemId> dict_new_install_list;
 	UpdateDictList(dict_new_install_list, &load_show_progress);
@@ -365,7 +371,11 @@ void AppCore::Create(const gchar *queryword)
 	g_signal_connect (G_OBJECT (window), "key_press_event", G_CALLBACK (vKeyPressReleaseCallback), this);
 	g_signal_connect (G_OBJECT (window), "key_release_event", G_CALLBACK (vKeyPressReleaseCallback), this);
 
+#if GTK_MAJOR_VERSION >= 3
+	GtkWidget *vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
+#else
 	GtkWidget *vbox = gtk_vbox_new(FALSE, 0);
+#endif
 	gtk_widget_show(vbox);
 	gtk_container_add(GTK_CONTAINER(window),vbox);
 	oTopWin.Create(vbox);
@@ -509,54 +519,62 @@ gboolean AppCore::vKeyPressReleaseCallback(GtkWidget * window, GdkEventKey *even
 
 	gboolean only_ctrl_pressed = ((event->state & GDK_CONTROL_MASK)&&(!(event->state & GDK_MOD1_MASK))&&(!(event->state & GDK_SHIFT_MASK)));
 	gboolean only_mod1_pressed = ((event->state & GDK_MOD1_MASK)&&(!(event->state & GDK_CONTROL_MASK))&&(!(event->state & GDK_SHIFT_MASK)));
-	if ((event->keyval==GDK_q || event->keyval==GDK_Q) && only_ctrl_pressed) {
+	if ((event->keyval==GDK_KEY_q || event->keyval==GDK_KEY_Q) && only_ctrl_pressed) {
 		if (event->type==GDK_KEY_PRESS)
 			oAppCore->Quit();
 	}
-	else if ((event->keyval==GDK_x || event->keyval==GDK_X) && only_mod1_pressed) {
+	else if ((event->keyval==GDK_KEY_x || event->keyval==GDK_KEY_X) && only_mod1_pressed) {
 		if (event->type==GDK_KEY_PRESS) {
 			oAppCore->oDockLet->minimize_to_tray();
 		}
 	}
-	else if ((event->keyval==GDK_z || event->keyval==GDK_Z) && only_mod1_pressed) {
+	else if ((event->keyval==GDK_KEY_z || event->keyval==GDK_KEY_Z) && only_mod1_pressed) {
 		if (event->type==GDK_KEY_PRESS) {
 			gtk_window_iconify(GTK_WINDOW(window));
 		}
 	}
-	else if ((event->keyval==GDK_e || event->keyval==GDK_E) && only_mod1_pressed) {
+	else if ((event->keyval==GDK_KEY_e || event->keyval==GDK_KEY_E) && only_mod1_pressed) {
 		if (event->type==GDK_KEY_PRESS) {
 			oAppCore->oMidWin.oToolWin.do_save();
 		}
 	}
-	else if (event->keyval==GDK_F1 && (!(event->state & GDK_CONTROL_MASK)) && (!(event->state & GDK_MOD1_MASK)) && (!(event->state & GDK_SHIFT_MASK))) {
+	else if (event->keyval==GDK_KEY_F1 && (!(event->state & GDK_CONTROL_MASK)) && (!(event->state & GDK_MOD1_MASK)) && (!(event->state & GDK_SHIFT_MASK))) {
 		if (event->type==GDK_KEY_PRESS)
 		  show_help(NULL);
 	}
-	else if ((event->keyval==GDK_f || event->keyval==GDK_F) && only_ctrl_pressed) {
+	else if ((event->keyval==GDK_KEY_f || event->keyval==GDK_KEY_F) && only_ctrl_pressed) {
 		if (event->type==GDK_KEY_PRESS)
 			oAppCore->oMidWin.oToolWin.do_search();
 	}
-	else if ((event->keyval==GDK_Left) && only_mod1_pressed) {
+	else if ((event->keyval==GDK_KEY_Left) && only_mod1_pressed) {
 		if (event->type==GDK_KEY_PRESS)
 			oAppCore->oTopWin.do_back();
 	}
-	else if ((event->keyval==GDK_Up) && only_mod1_pressed) {
+	else if ((event->keyval==GDK_KEY_Right) && only_mod1_pressed) {
+		if (event->type==GDK_KEY_PRESS)
+			oAppCore->oTopWin.do_forward();
+	}
+	else if ((event->keyval==GDK_KEY_Up) && only_mod1_pressed) {
 		if (event->type==GDK_KEY_PRESS)
 			oAppCore->oTopWin.do_prev();
 	}
-	else if ((event->keyval==GDK_Down) && only_mod1_pressed) {
+	else if ((event->keyval==GDK_KEY_Down) && only_mod1_pressed) {
 		if (event->type==GDK_KEY_PRESS)
 			oAppCore->oTopWin.do_next();
 	}
-	else if ((event->keyval==GDK_m || event->keyval==GDK_M) && only_mod1_pressed) {
+	else if ((event->keyval==GDK_KEY_c || event->keyval==GDK_KEY_C) && only_mod1_pressed) {
+		if (event->type==GDK_KEY_PRESS)
+			oAppCore->oTopWin.clear_entry();
+	}
+	else if ((event->keyval==GDK_KEY_m || event->keyval==GDK_KEY_M) && only_mod1_pressed) {
 		if (event->type==GDK_KEY_PRESS)
 			oAppCore->oTopWin.do_menu();
 	}
-	else if ((event->keyval==GDK_u || event->keyval==GDK_U) && only_ctrl_pressed) {
+	else if ((event->keyval==GDK_KEY_u || event->keyval==GDK_KEY_U) && only_ctrl_pressed) {
 		if (event->type==GDK_KEY_PRESS)
-			oAppCore->new_query_action();
+			oAppCore->oTopWin.clear_entry();
 	}
-	else if ((event->keyval==GDK_v || event->keyval==GDK_V) && only_ctrl_pressed &&
+	else if ((event->keyval==GDK_KEY_v || event->keyval==GDK_KEY_V) && only_ctrl_pressed &&
 			!oAppCore->oTopWin.has_focus() &&
 			!oAppCore->oMidWin.oTransWin.IsInputViewHasFocus() &&
 			!oAppCore->oMidWin.oTextWin.IsSearchPanelHasFocus()) {
@@ -573,17 +591,17 @@ gboolean AppCore::vKeyPressReleaseCallback(GtkWidget * window, GdkEventKey *even
 						 !oAppCore->oMidWin.oTextWin.IsSearchPanelHasFocus()) {
 		oAppCore->oTopWin.InsertHisList(oAppCore->oTopWin.get_text());
 		oAppCore->oTopWin.InsertBackList();
-		gchar str[2] = { event->keyval, '\0' };
+		gchar str[2] = { (gchar)(event->keyval), '\0' };
 		oAppCore->oTopWin.grab_focus();
 		oAppCore->oTopWin.SetText(str, conf->get_bool_at("main_window/search_while_typing"));
 		oAppCore->oTopWin.set_position_in_text(1);
-	} else if (event->type==GDK_KEY_PRESS && event->keyval == GDK_BackSpace &&
+	} else if (event->type==GDK_KEY_PRESS && event->keyval == GDK_KEY_BackSpace &&
 		!oAppCore->oTopWin.has_focus() &&
 		!oAppCore->oMidWin.oTransWin.IsInputViewHasFocus() &&
 		!oAppCore->oMidWin.oTextWin.IsSearchPanelHasFocus()) {
-		oAppCore->new_query_action();
+		oAppCore->oTopWin.clear_entry();
 	} else if (event->type == GDK_KEY_PRESS &&
-		   event->keyval == GDK_Return &&
+		   event->keyval == GDK_KEY_Return &&
 		   !oAppCore->oTopWin.has_focus() &&
 		   !oAppCore->oMidWin.oTransWin.IsInputViewHasFocus() &&
 		   !oAppCore->oMidWin.oTextWin.IsSearchPanelHasFocus()) {
@@ -626,32 +644,42 @@ gboolean AppCore::vKeyPressReleaseCallback(GtkWidget * window, GdkEventKey *even
 		oAppCore->oTopWin.InsertHisList(oAppCore->oTopWin.get_text());
 		oAppCore->oTopWin.InsertBackList();
 		oAppCore->oTopWin.grab_focus();
-	} else if(event->type==GDK_KEY_PRESS && event->keyval == GDK_Escape) {
+	} else if(event->type==GDK_KEY_PRESS && event->keyval == GDK_KEY_Escape) {
 		if(oAppCore->oMidWin.oTextWin.IsSearchPanelHasFocus())
 			oAppCore->oMidWin.oTextWin.HideSearchPanel();
 		else
-			oAppCore->new_query_action();
+			oAppCore->oTopWin.clear_entry();
 	} else {
 		return_val=false;
 	}
 	return return_val;
 }
 
-/* Clear the Search field and focus it. Be ready for new query. */
-void AppCore::new_query_action(void) {
-	if (oTopWin.get_text()[0]) {
-		oTopWin.InsertHisList(oTopWin.get_text());
-		oTopWin.InsertBackList();
-		oTopWin.SetText("");
-	}
-	oTopWin.grab_focus();
-}
-
 void AppCore::SimpleLookupToFloat(const char* sWord, bool IgnoreScanModifierKey)
 {
 	oFloatWin.StartLookup(sWord, IgnoreScanModifierKey);
 	composite_lookup_float_win.new_lookup();
-	SimpleLookupToFloatLocal(sWord);
+	if (IsASCII(sWord)) {
+		if (SimpleLookupToFloatLocal(sWord)) {
+			//found
+		} else {
+			gchar *sWord2 = g_strdup(sWord);
+			gchar *a = GetPureEnglishAlpha(sWord2);
+			if (*a) {
+				if (strcmp(sWord, a) == 0) {
+					// Not found.
+					oTopWin.InsertHisList(a); //really need?
+				} else {
+					SimpleLookupToFloatLocal(a);
+				}
+			} else {
+				// The string is too strange, don't show any thing.
+			}
+			g_free(sWord2);
+		}
+	} else {
+		SimpleLookupToFloatLocal(sWord);
+	}
 	bool enable_netdict = conf->get_bool_at("network/enable_netdict");
 	if (enable_netdict) {
 		STARDICT::Cmd *c = new STARDICT::Cmd(STARDICT::CMD_SELECT_QUERY, sWord);
@@ -687,7 +715,7 @@ bool AppCore::SimpleLookupToFloatLocal(const char* sWord)
 
 		bool bFound = false;
 		for (size_t iLib=0;iLib<scan_dictmask.size();iLib++)
-			BuildResultData(scan_dictmask, SearchWord, iIndex, false, iLib, pppWord, ppppWordData, bFound, 2);
+			BuildResultData(scan_dictmask, SearchWord, iIndex, NULL, iLib, pppWord, ppppWordData, bFound, 2);
 		for (size_t iLib=0; iLib<scan_dictmask.size(); iLib++)
 			BuildVirtualDictData(scan_dictmask, SearchWord, iLib, pppWord, ppppWordData, bFound);
 		if (bFound) {
@@ -1068,13 +1096,17 @@ void LookupDataDialog::on_fulltext_search_dict_enable_toggled (GtkCellRendererTo
 
 void LookupDataDialog::show()
 {
-	GtkWidget *dialog = gtk_dialog_new_with_buttons(_("Full-text Search"), GTK_WINDOW(gpAppFrame->window), (GtkDialogFlags)(GTK_DIALOG_MODAL | GTK_DIALOG_NO_SEPARATOR), NULL);
+	GtkWidget *dialog = gtk_dialog_new_with_buttons(_("Full-text Search"), GTK_WINDOW(gpAppFrame->window), GTK_DIALOG_MODAL, NULL, NULL, NULL);
 	GtkWidget *button = gtk_dialog_add_button(GTK_DIALOG (dialog), GTK_STOCK_OK, GTK_RESPONSE_ACCEPT);
 	gtk_dialog_add_button(GTK_DIALOG (dialog), GTK_STOCK_CANCEL, GTK_RESPONSE_REJECT);
 	gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_ACCEPT);
 	gtk_widget_grab_focus(button);
+#if GTK_MAJOR_VERSION >= 3
+	GtkWidget *vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
+#else
 	GtkWidget *vbox = gtk_vbox_new(false, 5);
-	gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox),vbox,true,true,0);
+#endif
+	gtk_box_pack_start(GTK_BOX(gtk_dialog_get_content_area(GTK_DIALOG(dialog))),vbox,true,true,0);
 	GtkWidget *sw = gtk_scrolled_window_new (NULL, NULL);
 	gtk_box_pack_start(GTK_BOX(vbox),sw,true,true,0);
 	gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (sw), GTK_SHADOW_IN);
@@ -1173,7 +1205,7 @@ void AppCore::LookupDataWithDictMask(const gchar *sWord, std::vector<InstantDict
 {
 	if (!sWord || !*sWord)
 		return;
-	change_cursor busy(window->window,
+	change_cursor busy(gtk_widget_get_window(window),
 			   get_impl(oAppSkin.watch_cursor),
 			   get_impl(oAppSkin.normal_cursor));
 
@@ -1183,7 +1215,11 @@ void AppCore::LookupDataWithDictMask(const gchar *sWord, std::vector<InstantDict
 	gtk_window_set_title (GTK_WINDOW(search_window), _("Full-text search..."));
 	gtk_window_set_transient_for(GTK_WINDOW(search_window), GTK_WINDOW(window));
 	gtk_window_set_position(GTK_WINDOW(search_window), GTK_WIN_POS_CENTER_ON_PARENT);
+#if GTK_MAJOR_VERSION >= 3
+	GtkWidget *vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 6);
+#else
 	GtkWidget *vbox = gtk_vbox_new(false, 6);
+#endif
 	gtk_container_add(GTK_CONTAINER(search_window),vbox);
 	Dialog.progress_bar = gtk_progress_bar_new();
 	gtk_box_pack_start(GTK_BOX(vbox),Dialog.progress_bar,false,false,0);
@@ -1216,7 +1252,7 @@ void AppCore::LookupWithFuzzyToMainWin(const gchar *sWord)
 {
 	if (sWord[0] == '\0')
 		return;
-	change_cursor busy(window->window,
+	change_cursor busy(gtk_widget_get_window(window),
 			   get_impl(oAppSkin.watch_cursor),
 			   get_impl(oAppSkin.normal_cursor));
 
@@ -1276,7 +1312,7 @@ void AppCore::LookupWithFuzzyToFloatWin(const gchar *sWord)
 
 			ppOriginWord[i] = fuzzy_reslist[i];
 			for (size_t iLib=0; iLib<scan_dictmask.size(); iLib++)
-				BuildResultData(scan_dictmask, fuzzy_reslist[i], iIndex, false, iLib, pppWord, ppppWordData, bFound, 2);
+				BuildResultData(scan_dictmask, fuzzy_reslist[i], iIndex, NULL, iLib, pppWord, ppppWordData, bFound, 2);
 			for (size_t iLib=0; iLib<scan_dictmask.size(); iLib++)
 				BuildVirtualDictData(scan_dictmask, fuzzy_reslist[i], iLib, pppWord, ppppWordData, bFound);
 			if (bFound) {// it is certainly be true.
@@ -1307,11 +1343,11 @@ void AppCore::LookupWithFuzzyToFloatWin(const gchar *sWord)
 
 void AppCore::LookupWithRuleToMainWin(const gchar *word)
 {
-	change_cursor busy(window->window,
+	change_cursor busy(gtk_widget_get_window(window),
 			   get_impl(oAppSkin.watch_cursor),
 			   get_impl(oAppSkin.normal_cursor));
 
-	gchar **ppMatchWord = (gchar **)g_malloc(sizeof(gchar *) * (MAX_MATCH_ITEM_PER_LIB*2) * query_dictmask.size());
+	gchar **ppMatchWord = (gchar **)g_malloc(sizeof(gchar *) * (MAX_MATCH_ITEM_PER_LIB*2) * query_dictmask.size()); //Need to be MAX_MATCH_ITEM_PER_LIB*2 as oLibs.LookupWithRule will call LookupWithRule() and LookupWithRuleSynonym().
 	gint iMatchCount=oLibs.LookupWithRule(word, ppMatchWord, query_dictmask);
 	oMidWin.oIndexWin.oListWin.Clear();
 	oMidWin.oIndexWin.oListWin.SetModel(true);
@@ -1336,11 +1372,11 @@ void AppCore::LookupWithRuleToMainWin(const gchar *word)
 
 void AppCore::LookupWithRegexToMainWin(const gchar *word)
 {
-	change_cursor busy(window->window,
+	change_cursor busy(gtk_widget_get_window(window),
 			   get_impl(oAppSkin.watch_cursor),
 			   get_impl(oAppSkin.normal_cursor));
 
-	gchar **ppMatchWord = (gchar **)g_malloc(sizeof(gchar *) * (MAX_MATCH_ITEM_PER_LIB*2) * query_dictmask.size());
+	gchar **ppMatchWord = (gchar **)g_malloc(sizeof(gchar *) * (MAX_MATCH_ITEM_PER_LIB*2) * query_dictmask.size()); //Need to be MAX_MATCH_ITEM_PER_LIB*2 as oLibs.LookupWithRegex will call LookupWithRegex() and LookupWithRegexSynonym().
 	gint iMatchCount=oLibs.LookupWithRegex(word, ppMatchWord, query_dictmask);
 	oMidWin.oIndexWin.oListWin.Clear();
 	oMidWin.oIndexWin.oListWin.SetModel(true);
@@ -1602,10 +1638,12 @@ void AppCore::TopWinWordChange(const gchar* sWord)
 		stop_word_change_timer();
 		delayed_word_ = res;
 		int word_change_timeout = conf->get_int_at("main_window/word_change_timeout");
-		if(word_change_timeout > 0)
+		if(word_change_timeout > 0) {
 			word_change_timeout_id = g_timeout_add(word_change_timeout, on_word_change_timeout, this);
-		else
+		} else {
+			//Allow word_change_timeout to be 0, so do an immediate search.
 			on_word_change_timeout(this);
+		}
 	}
 }
 
@@ -2029,6 +2067,8 @@ void AppCore::Init(const gchar *queryword)
     stardict_application_server_new(gdk_screen_get_default());
 #endif
 
+	stardict_splash.on_mainwin_finish();
+	oStarDictPlugins->MiscPlugins.on_mainwin_finish();
 	gtk_main();
 }
 
@@ -2188,6 +2228,7 @@ stardict_handle_automation_cmdline (const gchar *queryword)
 	gdk_notify_startup_complete ();
 }
 
+/*
 static void client_die_cb (GnomeClient *client, gpointer client_data)
 {
 	gpAppFrame->Quit();
@@ -2225,6 +2266,7 @@ static gboolean save_yourself_cb (GnomeClient       *client,
 
     return true;
 }
+*/
 #endif
 
 #if defined(_WIN32) && defined(_MSC_VER)
@@ -2273,8 +2315,7 @@ int main(int argc,char **argv)
 #if defined(_WIN32) && defined(_MSC_VER)
 	synchronize_crt_enviroment();
 #endif
-#if defined(_WIN32) || defined(CONFIG_GTK) || defined(CONFIG_MAEMO) || defined(CONFIG_DARWIN)
-	gtk_set_locale();
+#if defined(_WIN32) || defined(CONFIG_GTK) || defined(CONFIG_GNOME) || defined(CONFIG_MAEMO) || defined(CONFIG_DARWIN)
 	gtk_init(&argc, &argv);
 #endif
 	/* Register an interim logger.
@@ -2304,14 +2345,15 @@ int main(int argc,char **argv)
 	}
 	g_option_context_free(context);
 #else // #ifndef CONFIG_GNOME
-	GnomeProgram *program;
-	program = gnome_program_init ("stardict", VERSION,
-			    LIBGNOMEUI_MODULE, argc, argv,
+	//GnomeProgram *program;
+	gnome_program_init ("stardict", VERSION,
+			    LIBGNOME_MODULE, argc, argv,
 			    GNOME_PARAM_GOPTION_CONTEXT, context,
 			    GNOME_PARAM_HUMAN_READABLE_NAME,
 			    _("Dictionary"),
 			    GNOME_PARAM_APP_DATADIR, conf_dirs->get_system_data_dir().c_str(),
 			    NULL);
+	bonobo_init(&argc, argv);
 #endif // #ifndef CONFIG_GNOME
 
 	const char *query_word = NULL;
@@ -2355,11 +2397,13 @@ int main(int argc,char **argv)
 		}
 	}
 
+	/*
 	GnomeClient *client;
 	if ((client = gnome_master_client()) != NULL) {
 		g_signal_connect (client, "save_yourself", G_CALLBACK (save_yourself_cb), (gpointer) argv[0]);
 		g_signal_connect (client, "die", G_CALLBACK (client_die_cb), NULL);
 	}
+	*/
 #endif // #ifndef CONFIG_GNOME
 	g_debug(_("Loading StarDict configuration..."));
 	conf.reset(new AppConf);

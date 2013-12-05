@@ -21,6 +21,7 @@
 
 #include "stdio.h"
 #include "stdlib.h"
+#include <locale.h>
 #include <string.h>
 #include <gtk/gtk.h>
 #include <glib.h>
@@ -620,7 +621,7 @@ void captureAllChn(int chnum)
 	unsigned long offset;
 	char *cptr, *ptr;	//cptr
 	bool end = false;
-	const char const_ff[5]={0x0ff,0x0ff,0x0ff,0x0ff,0x0ff};
+	const char const_ff[5]={(char)(0x0ff),(char)(0x0ff),(char)(0x0ff),(char)(0x0ff),(char)(0x0ff)};
 
 	langMask = 'c';
 	unsigned short int si=0;
@@ -799,7 +800,7 @@ void captureAllWord(int chnum)
 	unsigned long offset;
 	char *cptr, *ptr;
 	bool end = false;
-	const char const_ff[5]={0x0ff,0x0ff,0x0ff,0x0ff,0x0ff};
+	const char const_ff[5]={(char)(0x0ff),(char)(0x0ff),(char)(0x0ff),(char)(0x0ff),(char)(0x0ff)};
 
 	langMask = 'e';
 	
@@ -1138,7 +1139,7 @@ utf8_converter = g_iconv_open("UTF-8","BIG5");
 int
 main(int argc,char * argv [])
 {
-	gtk_set_locale ();
+	setlocale(LC_ALL, "");
 	g_type_init ();
 	
 	convert();	

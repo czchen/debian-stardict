@@ -17,6 +17,8 @@
  * along with StarDict.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+// Notice: this dict.cn plugin is outdated and don't work fine now, as dict.cn website closed the xml querying interface, and the html querying interface changed to use java-script to load content. So this plugin is disabled by default.
+
 #include "stardict_dictdotcn.h"
 #include <glib/gi18n.h>
 #include <cstring>
@@ -296,7 +298,7 @@ static void process_xml_response(const char *data, size_t data_len, NetDictRespo
 	if (!Data.sentences.empty()) {
 		if(!definition.empty())
 			definition += "\n\n";
-		definition += "例句与用法:";
+		definition += "例句与用法：";
 		int index = 1;
 		char *tmp_str;
 		for (std::list<std::pair<std::string, std::string> >::iterator i = Data.sentences.begin(); i != Data.sentences.end(); ++i) {
@@ -309,7 +311,7 @@ static void process_xml_response(const char *data, size_t data_len, NetDictRespo
 	if (!Data.suggestions.empty()) {
 		if(!definition.empty())
 			definition += "\n\n";
-		definition += "Suggested words:";
+		definition += "建议单词：";
 		for(std::list<std::string>::const_iterator it=Data.suggestions.begin(); it != Data.suggestions.end(); ++it) {
 			definition += "\n";
 			definition += *it;
@@ -395,7 +397,11 @@ static void lookup(const char *word, bool ismainwin)
 static void configure()
 {
 	GtkWidget *window = gtk_dialog_new_with_buttons(_("Dict.cn configuration"), GTK_WINDOW(plugin_info->pluginwin), GTK_DIALOG_MODAL, GTK_STOCK_OK, GTK_RESPONSE_ACCEPT, NULL);
+#if GTK_MAJOR_VERSION >= 3
+	GtkWidget *vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
+#else
 	GtkWidget *vbox = gtk_vbox_new(false, 5);
+#endif
 	GtkWidget *xml_button = gtk_radio_button_new_with_label(NULL, _("Query by XML API."));
 	gtk_box_pack_start(GTK_BOX(vbox), xml_button, false, false, 0);
 	GtkWidget *html_button = gtk_radio_button_new_with_label_from_widget(GTK_RADIO_BUTTON(xml_button), _("Query by HTML API."));
@@ -406,7 +412,7 @@ static void configure()
 		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(xml_button), true);
 	}
 	gtk_widget_show_all(vbox);
-	gtk_container_add (GTK_CONTAINER (GTK_DIALOG(window)->vbox), vbox);
+	gtk_container_add (GTK_CONTAINER (gtk_dialog_get_content_area(GTK_DIALOG(window))), vbox);
 	gtk_dialog_run(GTK_DIALOG(window));
 	gboolean new_use_html_or_xml = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(html_button));
 	if (new_use_html_or_xml != use_html_or_xml) {
